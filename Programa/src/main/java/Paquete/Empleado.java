@@ -39,6 +39,6 @@ public class Empleado implements Invitable{
 
     public void invitar(Reunion reunion, Instant horaInvitacion) {
         Invitacion invitacion = new Invitacion(horaInvitacion);
-        reunion.agregarInvitacion(this, invitacion);
+        reunion.agregarInvitacion(this, invitacion); //nombrar el metodo segun como esté en Reunion
     }
 }

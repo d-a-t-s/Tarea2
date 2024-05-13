@@ -2,7 +2,9 @@ package Paquete;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Reunion{
     //Propiedades
@@ -14,6 +16,9 @@ public abstract class Reunion{
     private Duration duracionPrevista;
     private Instant horaInicio;
     private Instant horaFin;
+
+    private Map<Invitable, Invitacion> invitaciones;
+
     //Metodos
     public Reunion(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista){
         this.organizador = organizador;
@@ -40,4 +45,11 @@ public abstract class Reunion{
     public abstract void iniciar();
 
     public abstract void finalizar();
+
+    public void agregarInvitacion(Invitable invitado, Invitacion invitacion) {
+        if (invitaciones == null) {
+            invitaciones = new HashMap<>();
+        }
+        invitaciones.put(invitado, invitacion);
+    }
 }

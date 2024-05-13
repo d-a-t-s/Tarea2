@@ -9,7 +9,6 @@ class Invitacion {
         this.hora = hora;
     }
 
-    // Getters y setters
     public Instant getHora() {
         return hora;
     }
