@@ -1,0 +1,81 @@
+@startuml
+
+abstract class Reunion {
+    - fecha: Date
+    - horaPrevista: Instant
+    - duracionPrevista: Duration
+    - horaInicio: Instant
+    - horaFin: Instant;
+
+
+    + obtenerAsistencia() : List
+    + obtenerAusencias() : List
+    + ontenerRetrasos() : List
+    + obtenerTotalAsistencia() : int
+    + obtenerPorcentajeAsistencia() : float
+    + calcularTiempoReal() : float
+    + iniciar() : void
+    + finalizar() : void
+}
+
+enum TipoReunion {
+  * Tecnica
+  * Maketing
+  * Otro
+}
+
+class Nota {
+  - contenido : String
+}
+
+class Invitacion {
+  - hora : Instant
+}
+
+class Asistencia
+
+interface Invitable {
+
+    +invitar()
+}
+
+class ReunionVirtual {
+    - enlace : String
+}
+
+class ReunionPresencial {
+    - sala : String
+}
+
+class Retraso {
+    - hora : Instant
+}
+
+class Empleado {
+    - id : String
+    - apellidos : String
+    - nombre : String
+    - correo : String
+
+}
+
+class Departamento {
+    - nombre : String
+
+    +obtenerCantidadEmpleados() : int
+}
+
+Nota --* Reunion
+Asistencia --* Reunion
+Invitacion --* Reunion
+ReunionVirtual --|> Reunion
+ReunionPresencial --|> Reunion
+Reunion --> TipoReunion
+Invitacion --> Invitable
+Retraso --|> Asistencia
+Reunion  --> Empleado: organizado por
+Empleado --o Departamento
+Empleado ..|> Invitable
+Departamento ..|> Invitable
+
+@enduml
