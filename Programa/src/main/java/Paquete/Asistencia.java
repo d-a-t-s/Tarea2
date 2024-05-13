@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Asistencia{
-    //Propiedades
-    private List<Empleado> asistentes;
-    //Metodos
-    public Asistencia(){
-        asistentes = new ArrayList();
+    private Empleado empleado;
+    private EstadoAsistencia estado;
+
+    public Asistencia(Empleado empleado, EstadoAsistencia estado) {
+        this.empleado = empleado;
+        this.estado = estado;
     }
-    public void addAsistente(Empleado e){
-        asistentes.add(e);
+
+    public Empleado getEmpleado() {
+        return empleado;
     }
-    public Empleado getAsistente(){
-        return asistentes.remove(0);
+
+    public EstadoAsistencia getEstado() {
+        return estado;
     }
 }
