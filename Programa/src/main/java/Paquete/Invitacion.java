@@ -1,4 +1,20 @@
 package Paquete;
 
-public class Invitacion{
+import java.time.Instant;
+
+class Invitacion {
+    private Instant hora;
+
+    public Invitacion(Instant hora) {
+        this.hora = hora;
+    }
+
+    // Getters y setters
+    public Instant getHora() {
+        return hora;
+    }
+
+    public void setHora(Instant hora) {
+        this.hora = hora;
+    }
 }

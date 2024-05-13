@@ -2,6 +2,7 @@ package Paquete;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.Instant;
 
 public class Departamento implements Invitable {
     //Propiedades
@@ -29,7 +30,10 @@ public class Departamento implements Invitable {
     public int obtenerCantidadEmpleados(){
         return empleados.size();
     }
-    public void invitar(){
 
+    public void invitar(Reunion reunion, Instant horaInvitacion) {
+        for (Empleado empleado : empleados) {
+            empleado.invitar(reunion, horaInvitacion);
+        }
     }
 }

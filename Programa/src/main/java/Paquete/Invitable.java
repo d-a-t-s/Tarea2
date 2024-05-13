@@ -1,5 +1,7 @@
 package Paquete;
 
-public interface Invitable{
-    public void invitar();
+import java.time.Instant;
+
+interface Invitable {
+    void invitar(Reunion reunion, Instant horaInvitacion);
 }

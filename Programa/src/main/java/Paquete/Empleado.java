@@ -1,5 +1,7 @@
 package Paquete;
 
+import java.time.Instant;
+
 public class Empleado implements Invitable{
     //Propiedades
     private int id;
@@ -35,7 +37,8 @@ public class Empleado implements Invitable{
         return departamento;
     }
 
-    public void invitar(){
-
+    public void invitar(Reunion reunion, Instant horaInvitacion) {
+        Invitacion invitacion = new Invitacion(horaInvitacion);
+        reunion.agregarInvitacion(this, invitacion);
     }
 }
