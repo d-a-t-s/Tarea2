@@ -6,6 +6,7 @@ abstract class Reunion {
     - duracionPrevista: Duration
     - horaInicio: Instant
     - horaFin: Instant;
+    - invitaciones : Map<Invitable, Invitacion>
 
 
     + obtenerAsistencia() : List
@@ -16,6 +17,7 @@ abstract class Reunion {
     + calcularTiempoReal() : float
     + iniciar() : void
     + finalizar() : void
+    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
 }
 
 enum TipoReunion {
@@ -24,19 +26,38 @@ enum TipoReunion {
   * Otro
 }
 
+enum EstadoAsistencia {
+    * Presente
+    * Ausente
+    * Tarde
+}
+
 class Nota {
   - contenido : String
+
+  +getContenido() : String
+  +setContenido(String contenido) : Void
+  +toString() : String
 }
 
 class Invitacion {
   - hora : Instant
+
+  +getHora() : Instant
+  +setHora(Instant hora) : void
 }
 
-class Asistencia
+class Asistencia {
+    - empleado : Empleado
+    - estado : EstadoAsistencia
+
+    + getEmpleado() : empleado
+    + getEstado() : EstadoAsistencia
+}
 
 interface Invitable {
 
-    +invitar()
+    +invitar(Reunion reunion, Instant horaInvitacion) : void
 }
 
 class ReunionVirtual {
@@ -48,21 +69,37 @@ class ReunionPresencial {
 }
 
 class Retraso {
-    - hora : Instant
+    - horaLllegadaTarde : Instant
+
+    +getHoraLlegadaTarde() : Instant
 }
 
 class Empleado {
-    - id : String
+    - id : Int
     - apellidos : String
     - nombre : String
     - correo : String
+    - departamento : Departamento
+
+    +getId() : Int
+    +getNombre() : String
+    +getApellido() : String
+    +getCorreo() : String
+    +getDepartamento() : Departamento
+    +invitar(Reunion reunion, Instant horaInvitacion) : void
+
 
 }
 
 class Departamento {
     - nombre : String
+    - empleados : List<Empleado>
 
+    +addEmpleado(Empleado empleado) : void
+    +getNombre() : String
+    +getEmpleado() : List<Empleado>
     +obtenerCantidadEmpleados() : int
+    +invitar(Reunion reunion, Instant horaInvitacion) : void
 }
 
 Nota --* Reunion
@@ -77,5 +114,7 @@ Reunion  --> Empleado: organizado por
 Empleado --o Departamento
 Empleado ..|> Invitable
 Departamento ..|> Invitable
+Asistencia --> EstadoAsistencia
+Retraso --> EstadoAsistencia
 
 @enduml
