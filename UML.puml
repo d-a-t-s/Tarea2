@@ -1,23 +1,26 @@
 @startuml
 
 abstract class Reunion {
-    - fecha: Date
-    - horaPrevista: Instant
-    - duracionPrevista: Duration
-    - horaInicio: Instant
-    - horaFin: Instant;
-    - invitaciones : Map<Invitable, Invitacion>
+    # invitados : List
+    #asistentes : List<Asistencia>
+    #organizador : empleado
+    #fecha : LocalDate
+    # horaPrevista: Instant
+    # duracionPrevista: Duration
+    # horaInicio: Instant
+    # horaFin: Instant
+    # invitaciones : Map<Invitable, Invitacion>
 
-
-    + obtenerAsistencia() : List
-    + obtenerAusencias() : List
-    + ontenerRetrasos() : List
-    + obtenerTotalAsistencia() : int
-    + obtenerPorcentajeAsistencia() : float
-    + calcularTiempoReal() : float
-    + iniciar() : void
-    + finalizar() : void
-    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+    +abstract ingresarReunion() : void
+    +abstract obtenerAsistencia() : List
+    +abstract obtenerAusencias() : List
+    +abstract ontenerRetrasos() : List
+    +abstract obtenerTotalAsistencia() : int
+    +abstract obtenerPorcentajeAsistencia() : float
+    +abstract calcularTiempoReal() : float
+    +abstract iniciar() : void
+    +abstract finalizar() : void
+    +abstract agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
 }
 
 enum TipoReunion {
@@ -62,10 +65,32 @@ interface Invitable {
 
 class ReunionVirtual {
     - enlace : String
+
+    + ingresarReunion() : void
+    + obtenerAsistencia() : List
+    + obtenerAusencias() : List
+    + ontenerRetrasos() : List
+    + obtenerTotalAsistencia() : int
+    + obtenerPorcentajeAsistencia() : float
+    + calcularTiempoReal() : float
+    + iniciar() : void
+    + finalizar() : void
+    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
 }
 
 class ReunionPresencial {
     - sala : String
+
+    + ingresarReunion() : void
+        + obtenerAsistencia() : List
+        + obtenerAusencias() : List
+        + ontenerRetrasos() : List
+        + obtenerTotalAsistencia() : int
+        + obtenerPorcentajeAsistencia() : float
+        + calcularTiempoReal() : float
+        + iniciar() : void
+        + finalizar() : void
+        + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
 }
 
 class Retraso {
