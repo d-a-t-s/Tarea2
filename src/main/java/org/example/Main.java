@@ -29,6 +29,8 @@ public class Main {
             invitados.add(empleado);
         } */
 
+
+
         System.out.println("Empleados del departamento " + marketing.getNombre() + ":");
         for (Empleado empleado : marketing.getEmpleados()) {
             System.out.println(empleado.getNombre() + " " + empleado.getApellidos());
@@ -57,6 +59,12 @@ public class Main {
 
         // Crear una instancia de ReunionVirtual
         ReunionVirtual reunionVirtual = new ReunionVirtual(invitados, organizador, fechaReunion, horaInicioPrevista, duracionPrevista, enlaceReunion);
+
+        empleado1.invitar(reunionVirtual);
+        empleado2.invitar(reunionVirtual);
+        empleado3.invitar(reunionVirtual);
+        empleado4.invitar(reunionVirtual);
+
 
         // Marcar la asistencia de cada empleado
         Instant horaActual = Instant.now(); // Se asume que la hora actual es cuando los empleados llegan a la reunión
