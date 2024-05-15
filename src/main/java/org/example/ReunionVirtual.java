@@ -1,16 +1,12 @@
 package org.example;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class ReunionVirtual extends Reunion {
     private String enlace;
-    private Map<Invitable, Invitacion> invitaciones;
 
     // Constructor
     public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace){
@@ -26,7 +22,7 @@ class ReunionVirtual extends Reunion {
 
     // Método para marcar asistencia
     public void marcarAsistencia(Asistencia asistencia) {
-        switch (asistencia.getEstado()) {
+        switch (asistencia.getEstado()){
             case PRESENTE:
                 getAsistentesPresentes().add(asistencia);
                 break;
@@ -38,80 +34,98 @@ class ReunionVirtual extends Reunion {
                 break;
         }
     }
-
+    //Metodo para agregar a la reunion uno por uno
     @Override
-    public void ingresarReunion() {
-        // Lógica para unirse a la reunión virtual
-        System.out.println("Unirse a la reunión virtual en: " + enlace);
+    public void ingresarReunion(Invitacion invitacion){
+        List<Invitacion> copiaInvitado = new ArrayList<>(invitados);
+        Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
+        if(asistencia.getHoraLlegada().isBefore(horaPrevista)){
+            asistencia.setEstado(EstadoAsistencia.PRESENTE);
+            asistentesPresentes.add(asistencia);
+        } else if(asistencia.getHoraLlegada().isAfter(horaPrevista)){
+            asistencia.setEstado(EstadoAsistencia.TARDE);
+            asistentesTarde.add(asistencia);
+        }
+        copiaInvitado.remove(invitacion);
     }
-
+    //Metodo para agregar una lista de invitados
     @Override
-    public int obtenerAsistencia() {
-        return getAsistentesAusentes();
-    }
-
-    @Override
-    public List<Asistencia> obtenerAusencias() {
-        List<Asistencia> ausencias = new ArrayList<>();
-        for (Empleado invitado : invitados) {
-            boolean presente = false;
-            for (Asistencia asistencia : asistentesPresentes) {
-                if (asistencia.getEmpleado().equals(invitado)) {
-                    presente = true;
-                    break;
-                }
-            }
-            if (!presente) {
-                // Si el empleado no está en la lista de asistentes presentes, se marca como ausente
-                ausencias.add(new Asistencia(invitado, Asistencia.EstadoAsistencia.AUSENTE));
+    public void ingresarReunion(List<Invitacion> invitados){
+        for (Invitacion invitacion : invitados){
+            Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
+            if(asistencia.getHoraLlegada().isBefore(horaPrevista)){
+                asistencia.setEstado(EstadoAsistencia.PRESENTE);
+                asistentesPresentes.add(asistencia);
+            }else if(asistencia.getHoraLlegada().isAfter(horaPrevista)){
+                asistencia.setEstado(EstadoAsistencia.TARDE);
+                asistentesTarde.add(asistencia);
             }
         }
-        return ausencias;
+    }
+
+    @Override
+    public List<Asistencia> obtenerAsistencia(){
+        return asistentesPresentes;
     }
 
     @Override
     public List<Asistencia> obtenerRetrasos() {
-        List<Asistencia> retrasos = new ArrayList<>();
-        for (Asistencia asistencia : asistentesTarde) {
-            // Si la hora de llegada tardía está presente, se considera un retraso
-            if (asistencia.getHoraLlegadaTarde() != null) {
-                retrasos.add(asistencia);
+        return asistentesTarde;
+    }
+
+    @Override
+    public List<Asistencia> obtenerAusencias(){
+        for (Invitacion invitado : invitados){
+            boolean aux = false;
+            for (Asistencia asistente : asistentesPresentes){
+                if (invitado.getInvitado() == asistente.getEmpleado()){
+                    aux = true;
+                }
+            }
+            if (aux == false) {
+                Asistencia ausente = new Asistencia(invitado.getInvitado(), EstadoAsistencia.AUSENTE);
+                asistentesAusentes.add(ausente);
             }
         }
-        return retrasos;
+        return asistentesAusentes;
     }
 
     @Override
     public int obtenerTotalAsistencia() {
-        // Lógica para calcular el total de asistentes a la reunión virtual
-        return asistentes.size();
+        return asistentesPresentes.size() + asistentesTarde.size();
     }
 
     @Override
     public float obtenerPorcentajeAsistencia() {
-        // Lógica para calcular el porcentaje de asistencia a la reunión virtual
-        return 0;
+        int totalInvitados = invitados.size();
+        int totalAsistentes = obtenerTotalAsistencia();
+        return (totalAsistentes / (float) totalInvitados) * 100;
     }
 
     @Override
     public float calcularTiempoReal() {
-        // Lógica para calcular el tiempo real de la reunión virtual
-        // Puede depender de la duración de la reunión y de cualquier retraso registrado
-        return 0; // Implementación temporal
+        if (horaInicio == null || horaFin == null) {
+            return 0;
+        }
+        return Duration.between(horaInicio, horaFin).toMinutes();
     }
 
     @Override
     public void iniciar() {
-        // Lógica para iniciar la reunión virtual
-        System.out.println("La reunión virtual ha comenzado.");
         horaInicio = Instant.now();
+        LocalDateTime fechaHoraInicio = LocalDateTime.ofInstant(horaInicio, ZoneId.systemDefault());
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyy");
+        String horaInicioFormateada = fechaHoraInicio.format(formateador);
+        System.out.println("La reunión virtual ha comenzado a las " + horaInicioFormateada);
     }
 
     @Override
     public void finalizar() {
-        // Lógica para finalizar la reunión virtual
-        System.out.println("La reunión virtual ha finalizado.");
         horaFin = Instant.now();
+        LocalDateTime fechaHoraFin = LocalDateTime.ofInstant(horaInicio, ZoneId.systemDefault());
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyy");
+        String horaFinFormateada = fechaHoraFin.format(formateador);
+        System.out.println("La reunión virtual ha finalizado a las" + horaFinFormateada);
     }
 
 

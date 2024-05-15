@@ -58,7 +58,7 @@ public class Main {
         String enlaceReunion = "https://ejemplo.com/reunion"; // Enlace para unirse a la reunión virtual
 
         // Crear una instancia de ReunionVirtual
-        ReunionVirtual reunionVirtual = new ReunionVirtual(invitados, organizador, fechaReunion, horaInicioPrevista, duracionPrevista, enlaceReunion);
+        ReunionVirtual reunionVirtual = new ReunionVirtual(organizador, fechaReunion, horaInicioPrevista, duracionPrevista, enlaceReunion);
 
         empleado1.invitar(reunionVirtual);
         empleado2.invitar(reunionVirtual);
@@ -72,14 +72,14 @@ public class Main {
             Asistencia asistencia;
             if (empleado.getId() == 1) {
                 // Marcar a empleado1 como llegada tarde
-                asistencia = new Asistencia(empleado, Asistencia.EstadoAsistencia.TARDE);
-                asistencia.setHoraLlegadaTarde(Instant.now()); // Suponiendo que llega tarde en el momento actual
+                asistencia = new Asistencia(empleado, EstadoAsistencia.TARDE);
+                asistencia.setHoraLlegada(Instant.now()); // Suponiendo que llega tarde en el momento actual
             } else if (empleado.getId() == 3 || empleado.getId() == 5) {
                 // Marcar a empleado3 y empleado5 como presentes
-                asistencia = new Asistencia(empleado, Asistencia.EstadoAsistencia.PRESENTE);
+                asistencia = new Asistencia(empleado, EstadoAsistencia.PRESENTE);
             } else{
                 // Marcar a los demás empleados como ausentes
-                asistencia = new Asistencia(empleado, Asistencia.EstadoAsistencia.AUSENTE);
+                asistencia = new Asistencia(empleado, EstadoAsistencia.AUSENTE);
             }
             reunionVirtual.marcarAsistencia(asistencia);
         }
@@ -101,7 +101,7 @@ public class Main {
         // Mostrar la hora de llegada tarde de cada empleado que llegó tarde
         for (Asistencia asistencia : asistentesTarde) {
             System.out.println("Empleado: " + asistencia.getEmpleado().getNombre() +
-                    ", Hora de llegada tarde: " + asistencia.getHoraLlegadaTarde());
+                    ", Hora de llegada tarde: " + asistencia.getHoraLlegada());
         }
     }
 }

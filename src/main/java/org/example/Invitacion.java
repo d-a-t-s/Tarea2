@@ -11,9 +11,12 @@ public class Invitacion {
         hora = Instant.now();
     }
 
-    //Getters
+    //Getters y setters
     public Instant getHora(){
         return hora;
+    }
+    public void setHora(Instant hora){
+        this.hora = hora;
     }
     public Empleado getInvitado(){
         return invitado;

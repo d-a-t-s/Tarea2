@@ -8,17 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 abstract class Reunion{
-    private List<Invitacion> invitados;
-    private List<Asistencia> asistentesPresentes;
-    private List<Asistencia> asistentesTarde;
-    private List<Asistencia> asistentesAusentes;
-    private Empleado organizador;
-    private LocalDate fecha;
-    private Instant horaPrevista;
-    private Duration duracionPrevista;
-    private Instant horaInicio;
-    private Instant horaFin;
-    private Map<Invitable, Invitacion> invitaciones;
+    protected List<Invitacion> invitados;
+    protected List<Asistencia> asistentesPresentes;
+    protected List<Asistencia> asistentesTarde;
+    protected List<Asistencia> asistentesAusentes;
+    protected Empleado organizador;
+    protected LocalDate fecha;
+    protected Instant horaPrevista;
+    protected Duration duracionPrevista;
+    protected Instant horaInicio;
+    protected Instant horaFin;
 
     public Reunion(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista){
         invitados = new ArrayList<>();
@@ -33,7 +32,8 @@ abstract class Reunion{
         this.horaFin = null;
     }
     public abstract void agregarInvitacion(Empleado invitado, Invitacion invitacion);
-    public abstract void ingresarReunion();
+    public abstract void ingresarReunion(Invitacion inv);
+    public abstract void ingresarReunion(List<Invitacion> invs);
     public abstract List<Asistencia> obtenerAsistencia();
     public abstract List<Asistencia> obtenerAusencias();
     public abstract List<Asistencia> obtenerRetrasos();
@@ -74,8 +74,36 @@ abstract class Reunion{
     public Instant getHoraFin() {
         return horaFin;
     }
-    public Map<Invitable, Invitacion> getInvitaciones() {
-        return invitaciones;
+    //Setters
+    public void setInvitados(List<Invitacion> invitados) {
+        this.invitados = invitados;
+    }
+    public void setAsistentesPresentes(List<Asistencia> asistentesPresentes) {
+        this.asistentesPresentes = asistentesPresentes;
+    }
+    public void setAsistentesTarde(List<Asistencia> asistentesTarde) {
+        this.asistentesTarde = asistentesTarde;
+    }
+    public void setAsistentesAusentes(List<Asistencia> asistentesAusentes) {
+        this.asistentesAusentes = asistentesAusentes;
+    }
+    public void setOrganizador(Empleado organizador) {
+        this.organizador = organizador;
+    }
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+    public void setHoraPrevista(Instant horaPrevista) {
+        this.horaPrevista = horaPrevista;
+    }
+    public void setDuracionPrevista(Duration duracionPrevista) {
+        this.duracionPrevista = duracionPrevista;
+    }
+    public void setHoraInicio(Instant horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+    public void setHoraFin(Instant horaFin) {
+        this.horaFin = horaFin;
     }
 }
 

@@ -3,20 +3,16 @@ package org.example;
 import java.time.Instant;
 
 public class Asistencia {
-    public enum EstadoAsistencia {
-        PRESENTE,
-        AUSENTE,
-        TARDE
-    }
-
+    //Propiedades
     private Empleado empleado;
     private EstadoAsistencia estado;
-    private Instant horaLlegadaTarde;
+    private Instant horaLlegada;
 
     // Constructor
     public Asistencia(Empleado empleado, EstadoAsistencia estado) {
         this.empleado = empleado;
         this.estado = estado;
+        horaLlegada = Instant.now();
     }
 
     // Métodos getters y setters
@@ -36,18 +32,18 @@ public class Asistencia {
         this.estado = estado;
     }
 
-    public Instant getHoraLlegadaTarde() {
-        return horaLlegadaTarde;
+    public Instant getHoraLlegada() {
+        return horaLlegada;
     }
 
-    public void setHoraLlegadaTarde(Instant horaLlegadaTarde) {
-        this.horaLlegadaTarde = horaLlegadaTarde;
+    public void setHoraLlegada(Instant horaLlegada) {
+        this.horaLlegada = horaLlegada;
     }
 
     // Método para marcar al empleado como llegado tarde
-    public void marcarLlegadaTarde(Instant horaLlegadaTarde) {
+    public void marcarLlegada(Instant horaLlegada) {
         this.estado = EstadoAsistencia.TARDE;
-        this.horaLlegadaTarde = horaLlegadaTarde;
+        this.horaLlegada = horaLlegada;
     }
 
     // Método para marcar al empleado como ausente
