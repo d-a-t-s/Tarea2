@@ -27,6 +27,6 @@ abstract class Reunion {
     public abstract float calcularTiempoReal();
     public abstract void iniciar();
     public abstract void finalizar();
-    public abstract void agregarInvitacion(Invitable invitado, Invitacion invitacion);
+
 }
 

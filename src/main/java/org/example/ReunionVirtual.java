@@ -120,10 +120,6 @@ class ReunionVirtual extends Reunion {
         horaFin = Instant.now();
     }
 
-    @Override
-    public void agregarInvitacion(Invitable invitado, Invitacion invitacion) {
-        // Lógica para agregar una invitación a la reunión virtual
-        invitaciones.put(invitado, invitacion);
-    }
+
 }
 

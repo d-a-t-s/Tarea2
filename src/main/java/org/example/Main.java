@@ -77,5 +77,11 @@ public class Main {
 
         // Imprimir el número de asistentes que llegaron tarde
         System.out.println("Número de asistentes que llegaron tarde: " + asistentesTarde.size());
+
+        // Mostrar la hora de llegada tarde de cada empleado que llegó tarde
+        for (Asistencia asistencia : asistentesTarde) {
+            System.out.println("Empleado: " + asistencia.getEmpleado().getNombre() +
+                    ", Hora de llegada tarde: " + asistencia.getHoraLlegadaTarde());
+        }
     }
 }
