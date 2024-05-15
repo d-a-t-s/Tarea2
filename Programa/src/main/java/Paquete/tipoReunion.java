@@ -1,4 +1,14 @@
 package Paquete;
 
-public enum tipoReunion {
+enum tipoReunion{
+    TECNICA(1), MARKETING(2), OTRO(3);
+    private final int valor;
+
+    tipoReunion(int valor){
+        this.valor = valor;
+    }
+
+    public int getReunion(){
+        return valor;
+    }
 }

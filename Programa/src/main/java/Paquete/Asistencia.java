@@ -1,19 +1,11 @@
 package Paquete;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Asistencia{
     //Propiedades
-    private List<Empleado> asistentes;
+    private Empleado asistente;
     //Metodos
-    public Asistencia(){
-        asistentes = new ArrayList();
+    public Asistencia(Empleado asistente){
+        this.asistente = asistente;
     }
-    public void addAsistente(Empleado e){
-        asistentes.add(e);
-    }
-    public Empleado getAsistente(){
-        return asistentes.remove(0);
-    }
+
 }
