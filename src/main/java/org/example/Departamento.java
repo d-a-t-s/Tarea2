@@ -38,5 +38,11 @@ public class Departamento implements Invitable {
     public int obtenerNumeroEmpleados() {
         return empleados.size();
     }
+
+    public void invitar(Reunion reunion){
+        for(Empleado empleado : empleados){
+            empleado.invitar(reunion);
+        }
+    }
 }
 

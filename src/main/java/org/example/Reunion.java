@@ -15,8 +15,9 @@ abstract class Reunion {
     protected Duration duracionPrevista;
     protected Instant horaInicio;
     protected Instant horaFin;
-    protected Map<Invitable, Invitacion> invitaciones;
+    private Map<Invitable, Invitacion> invitaciones;
 
+    public abstract void agregarInvitacion(Empleado invitado, Invitacion invitacion);
     public abstract void ingresarReunion();
     public abstract List<Asistencia> obtenerAsistencia();
     public abstract List<Asistencia> obtenerAusencias();

@@ -4,10 +4,13 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class ReunionVirtual extends Reunion {
     private String enlace;
+    private Map<Invitable, Invitacion> invitaciones;
 
     private List<Asistencia> asistentesPresentes;
     private List<Asistencia> asistentesAusentes;
@@ -22,9 +25,18 @@ class ReunionVirtual extends Reunion {
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
         this.enlace = enlace;
+        this.invitaciones = new HashMap<>();
         this.asistentesPresentes = new ArrayList<>();
         this.asistentesAusentes = new ArrayList<>();
         this.asistentesTarde = new ArrayList<>();
+    }
+
+    @Override
+    public void agregarInvitacion(Empleado invitado, Invitacion invitacion) {
+        if (invitaciones == null) {
+            invitaciones = new HashMap<>();
+        }
+        invitaciones.put(invitado, invitacion);
     }
 
     // Método para marcar asistencia
@@ -117,6 +129,7 @@ class ReunionVirtual extends Reunion {
         System.out.println("La reunión virtual ha finalizado.");
         horaFin = Instant.now();
     }
+
 
 
 }

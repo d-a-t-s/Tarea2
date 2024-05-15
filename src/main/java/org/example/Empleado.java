@@ -57,4 +57,9 @@ public class Empleado implements Invitable {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+
+    public void invitar(Reunion reunion){
+        Invitacion invitacion = new Invitacion();
+        reunion.agregarInvitacion(this, invitacion);
+    }
 }

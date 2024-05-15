@@ -1,36 +1,24 @@
 package org.example;
 
+import java.time.Instant;
+
 public class Invitacion {
-    private Reunion reunion;
-    private Invitable invitado;
-
-    // Constructor
-    public Invitacion(Reunion reunion, Invitable invitado) throws InvitacionException {
-        if (reunion == null && invitado == null) {
-            throw new InvitacionException("Ambos la reunión y el invitado no pueden ser nulos.");
-        } else if (reunion == null) {
-            throw new InvitacionException("La reunión no puede ser nula.");
-        } else if (invitado == null) {
-            throw new InvitacionException("El invitado no puede ser nulo.");
-        }
-        this.reunion = reunion;
-        this.invitado = invitado;
+    //Propiedades
+    private Instant hora;
+    private Empleado invitado;
+    //Metodos
+    public Invitacion(){
+        hora = Instant.now();
     }
 
-    // Métodos getters y setters
-    public Reunion getReunion() {
-        return reunion;
+    //Getters
+    public Instant getHora(){
+        return hora;
     }
-
-    public void setReunion(Reunion reunion) {
-        this.reunion = reunion;
-    }
-
-    public Invitable getInvitado() {
+    public Empleado getInvitado(){
         return invitado;
     }
-
-    public void setInvitado(Invitable invitado) {
+    public void setInvitado(Empleado invitado){
         this.invitado = invitado;
     }
 }

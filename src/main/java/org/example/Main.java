@@ -15,6 +15,7 @@ public class Main {
         Departamento marketing = new Departamento("Marketing");
         Departamento otro = new Departamento("Otro");
 
+        Empleado empleado0 = new Empleado(1, "Felipe", "Soto", "felipe@example.com", otro);
         Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com", marketing);
         Empleado empleado2 = new Empleado(2, "María", "Gómez", "maria@example.com", otro);
         Empleado empleado3 = new Empleado(3, "Pedro", "López", "pedro@example.com", marketing);
@@ -23,10 +24,10 @@ public class Main {
         Empleado empleado6 = new Empleado(6, "Sofía", "Hernández", "sofia@example.com", otro);
         Empleado empleado7 = new Empleado(7, "Luis", "Díaz", "luis@example.com", marketing);
 
-        //Invitar a todo el departamento
+        /* //Invitar a todo el departamento
         for (Empleado empleado : marketing.getEmpleados()) {
             invitados.add(empleado);
-        }
+        } */
 
         System.out.println("Empleados del departamento " + marketing.getNombre() + ":");
         for (Empleado empleado : marketing.getEmpleados()) {
@@ -44,7 +45,7 @@ public class Main {
         invitados.add(empleado7); */
 
         // Crear una instancia de organizador
-        Empleado organizador = empleado1; // Podría ser cualquier empleado
+        Empleado organizador = empleado0; // Podría ser cualquier empleado
 
         // Crear una fecha y hora prevista para la reunión
         LocalDate fechaReunion = LocalDate.now(); // Fecha actual
@@ -68,7 +69,7 @@ public class Main {
             } else if (empleado.getId() == 3 || empleado.getId() == 5) {
                 // Marcar a empleado3 y empleado5 como presentes
                 asistencia = new Asistencia(empleado, Asistencia.EstadoAsistencia.PRESENTE);
-            } else {
+            } else{
                 // Marcar a los demás empleados como ausentes
                 asistencia = new Asistencia(empleado, Asistencia.EstadoAsistencia.AUSENTE);
             }
