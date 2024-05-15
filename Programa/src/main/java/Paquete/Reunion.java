@@ -1,4 +1,5 @@
 package Paquete;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -30,20 +31,49 @@ public abstract class Reunion{
 
     public abstract void ingresarReunion(Invitacion invitacion);
 
+    /**
+     * Método abstracto para obtener la lista de asistencias a la reunión.
+     * @return La lista de asistencias a la reunión.
+     */
     public abstract List obtenerAsistencias();
 
+    /**
+     * Método abstracto para obtener la lista de ausencias a la reunión.
+     * @return La lista de ausencias a la reunión.
+     */
     public abstract List obtenerAusencias();
 
+    /**
+     * Método abstracto para obtener la lista de retrasos a la reunión.
+     * @return La lista de retrasos a la reunión.
+     */
     public abstract List obtenerRetrasos();
 
+    /**
+     * Método abstracto para obtener el total de asistentes a la reunión.
+     * @return El total de asistentes a la reunión.
+     */
     public abstract int obtenerTotalAsistencia();
 
+    /**
+     * Método abstracto para obtener el porcentaje de asistencia a la reunión.
+     * @return El porcentaje de asistencia a la reunión.
+     */
     public abstract float obtenerPorcentajeAsistencia();
 
-    public abstract float calcularTeimpoReal();
+    /**
+     * Método abstracto para calcular el tiempo real de la reunión.
+     * @return El tiempo real de la reunión.
+     */
 
+    /**
+     * Método abstracto para iniciar la reunión.
+     */
     public abstract void iniciar();
 
+    /**
+     * Método abstracto para finalizar la reunión.
+     */
     public abstract void finalizar();
 
     //Getters

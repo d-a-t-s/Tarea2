@@ -3,8 +3,13 @@ package Paquete;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Departamento implements Invitable{
-    //Propiedades
+/**
+ * Clase que representa un departamento de la empresa.
+ * Implementa la interfaz Invitable.
+ */
+public class Departamento implements Invitable {
+
+    /** Nombre del departamento */
     private String nombre;
     private List<Empleado> departamento;
     //Metodos

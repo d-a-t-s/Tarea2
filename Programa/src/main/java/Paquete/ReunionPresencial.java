@@ -6,8 +6,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa una reunión presencial, extiende de la clase Reunion.
+ */
 public class ReunionPresencial extends Reunion{
-    //Propiedades
+
+    /** Sala donde se llevará a cabo la reunión presencial */
     private String sala;
     //Metodos
     public ReunionPresencial(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String sala){
@@ -47,11 +51,6 @@ public class ReunionPresencial extends Reunion{
 
     @Override
     public float obtenerPorcentajeAsistencia(){
-        return 0;
-    }
-
-    @Override
-    public float calcularTeimpoReal(){
         return 0;
     }
 

@@ -1,5 +1,4 @@
 package Paquete;
-
 import java.time.Instant;
 
 public class Invitacion{
