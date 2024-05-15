@@ -3,14 +3,10 @@ package org.example;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class ReunionVirtual extends Reunion {
     private String enlace;
-    private Map<Invitable, Invitacion> invitaciones;
 
     // Constructor
     public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace){
@@ -46,58 +42,42 @@ class ReunionVirtual extends Reunion {
     }
 
     @Override
-    public int obtenerAsistencia() {
-        return getAsistentesAusentes();
+    public List<Asistencia> obtenerAsistencia() {
+        return getAsistentesPresentes();
     }
 
     @Override
     public List<Asistencia> obtenerAusencias() {
-        List<Asistencia> ausencias = new ArrayList<>();
-        for (Empleado invitado : invitados) {
-            boolean presente = false;
-            for (Asistencia asistencia : asistentesPresentes) {
-                if (asistencia.getEmpleado().equals(invitado)) {
-                    presente = true;
-                    break;
-                }
-            }
-            if (!presente) {
-                // Si el empleado no está en la lista de asistentes presentes, se marca como ausente
-                ausencias.add(new Asistencia(invitado, Asistencia.EstadoAsistencia.AUSENTE));
-            }
-        }
-        return ausencias;
+        return getAsistentesAusentes();
     }
 
     @Override
     public List<Asistencia> obtenerRetrasos() {
-        List<Asistencia> retrasos = new ArrayList<>();
-        for (Asistencia asistencia : asistentesTarde) {
-            // Si la hora de llegada tardía está presente, se considera un retraso
-            if (asistencia.getHoraLlegadaTarde() != null) {
-                retrasos.add(asistencia);
-            }
-        }
-        return retrasos;
+        return getAsistentesTarde();
     }
 
     @Override
     public int obtenerTotalAsistencia() {
         // Lógica para calcular el total de asistentes a la reunión virtual
-        return asistentes.size();
+        return getAsistentesPresentes().size() + getAsistentesTarde().size();
     }
 
     @Override
     public float obtenerPorcentajeAsistencia() {
         // Lógica para calcular el porcentaje de asistencia a la reunión virtual
-        return 0;
+        int totalInvitados = getInvitados().size();
+        int totalAsistentes = obtenerTotalAsistencia();
+        return (totalAsistentes / (float) totalInvitados) * 100;
     }
 
     @Override
     public float calcularTiempoReal() {
         // Lógica para calcular el tiempo real de la reunión virtual
         // Puede depender de la duración de la reunión y de cualquier retraso registrado
-        return 0; // Implementación temporal
+        if (getHoraInicio() == null || getHoraFin() == null) {
+            return 0;
+        }
+        return Duration.between(getHoraInicio(), getHoraFin()).toMinutes();
     }
 
     @Override

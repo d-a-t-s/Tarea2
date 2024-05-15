@@ -5,20 +5,18 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 abstract class Reunion{
-    private List<Invitacion> invitados;
-    private List<Asistencia> asistentesPresentes;
-    private List<Asistencia> asistentesTarde;
-    private List<Asistencia> asistentesAusentes;
-    private Empleado organizador;
-    private LocalDate fecha;
-    private Instant horaPrevista;
-    private Duration duracionPrevista;
-    private Instant horaInicio;
-    private Instant horaFin;
-    private Map<Invitable, Invitacion> invitaciones;
+    protected List<Invitacion> invitados;
+    protected List<Asistencia> asistentesPresentes;
+    protected List<Asistencia> asistentesTarde;
+    protected List<Asistencia> asistentesAusentes;
+    protected Empleado organizador;
+    protected LocalDate fecha;
+    protected Instant horaPrevista;
+    protected Duration duracionPrevista;
+    protected Instant horaInicio;
+    protected Instant horaFin;
 
     public Reunion(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista){
         invitados = new ArrayList<>();
@@ -73,9 +71,6 @@ abstract class Reunion{
     }
     public Instant getHoraFin() {
         return horaFin;
-    }
-    public Map<Invitable, Invitacion> getInvitaciones() {
-        return invitaciones;
     }
 }
 

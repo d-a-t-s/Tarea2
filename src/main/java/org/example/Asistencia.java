@@ -3,12 +3,6 @@ package org.example;
 import java.time.Instant;
 
 public class Asistencia {
-    public enum EstadoAsistencia {
-        PRESENTE,
-        AUSENTE,
-        TARDE
-    }
-
     private Empleado empleado;
     private EstadoAsistencia estado;
     private Instant horaLlegadaTarde;
