@@ -17,20 +17,20 @@ class ReunionVirtual extends Reunion {
     @Override
     public void agregarInvitacion(Empleado invitado, Invitacion invitacion) {
         invitacion.setInvitado(invitado);
-        getInvitados().add(invitacion);
+        invitados.add(invitacion);
     }
 
     // Método para marcar asistencia
     public void marcarAsistencia(Asistencia asistencia) {
         switch (asistencia.getEstado()){
             case PRESENTE:
-                getAsistentesPresentes().add(asistencia);
+                asistentesPresentes.add(asistencia);
                 break;
             case AUSENTE:
-                getAsistentesAusentes().add(asistencia);
+                asistentesAusentes.add(asistencia);
                 break;
             case TARDE:
-                getAsistentesTarde().add(asistencia);
+                asistentesTarde.add(asistencia);
                 break;
         }
     }
@@ -66,6 +66,7 @@ class ReunionVirtual extends Reunion {
     @Override
     public List<Asistencia> obtenerAsistencia(){
         return asistentesPresentes;
+
     }
 
     @Override
@@ -91,7 +92,7 @@ class ReunionVirtual extends Reunion {
     }
 
     @Override
-    public int obtenerTotalAsistencia() {
+    public int obtenerTotalAsistencia(){
         return asistentesPresentes.size() + asistentesTarde.size();
     }
 

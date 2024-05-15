@@ -73,7 +73,11 @@ public class Main {
             if (empleado.getId() == 1) {
                 // Marcar a empleado1 como llegada tarde
                 asistencia = new Asistencia(empleado, EstadoAsistencia.TARDE);
+<<<<<<< HEAD
                 asistencia.setHoraLlegada(Instant.now()); // Suponiendo que llega tarde en el momento actual
+=======
+                asistencia.setHoraLlegadaTarde(Instant.now()); // Suponiendo que llega tarde en el momento actual
+>>>>>>> 54ed296a723b4739fda23d97662f103eee109b2c
             } else if (empleado.getId() == 3 || empleado.getId() == 5) {
                 // Marcar a empleado3 y empleado5 como presentes
                 asistencia = new Asistencia(empleado, EstadoAsistencia.PRESENTE);
@@ -84,22 +88,22 @@ public class Main {
             reunionVirtual.marcarAsistencia(asistencia);
         }
 
-        // Acceder a las listas de asistencia
-        List<Asistencia> asistentesPresentes = reunionVirtual.obtenerAsistencia();
-        List<Asistencia> asistentesAusentes = reunionVirtual.obtenerAusencias();
-        List<Asistencia> asistentesTarde = reunionVirtual.obtenerRetrasos();
+        // Acceder y imprimir las listas de asistentes desde el main
+        List<Asistencia> presentes = reunionVirtual.asistentesPresentes;
+        List<Asistencia> ausentes = reunionVirtual.asistentesAusentes;
+        List<Asistencia> tarde = reunionVirtual.asistentesTarde;
 
         // Imprimir el número de asistentes presentes
-        System.out.println("Número de asistentes presentes: " + asistentesPresentes.size());
+        System.out.println("Número de asistentes presentes: " + presentes.size());
 
         // Imprimir el número de asistentes ausentes
-        System.out.println("Número de asistentes ausentes: " + asistentesAusentes.size());
+        System.out.println("Número de asistentes ausentes: " + ausentes.size());
 
         // Imprimir el número de asistentes que llegaron tarde
-        System.out.println("Número de asistentes que llegaron tarde: " + asistentesTarde.size());
+        System.out.println("Número de asistentes que llegaron tarde: " + tarde.size());
 
         // Mostrar la hora de llegada tarde de cada empleado que llegó tarde
-        for (Asistencia asistencia : asistentesTarde) {
+        for (Asistencia asistencia : tarde) {
             System.out.println("Empleado: " + asistencia.getEmpleado().getNombre() +
                     ", Hora de llegada tarde: " + asistencia.getHoraLlegada());
         }

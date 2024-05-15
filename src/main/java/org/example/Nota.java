@@ -36,5 +36,4 @@ public class Nota{
     public String toString() {
         return contenido;
     }
-
 }
