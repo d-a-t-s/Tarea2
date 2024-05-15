@@ -12,44 +12,29 @@ class ReunionVirtual extends Reunion {
     private String enlace;
     private Map<Invitable, Invitacion> invitaciones;
 
-    private List<Asistencia> asistentesPresentes;
-    private List<Asistencia> asistentesAusentes;
-    private List<Asistencia> asistentesTarde;
-
     // Constructor
-    public ReunionVirtual(List<Empleado> invitados, Empleado organizador, LocalDate fecha, Instant horaPrevista,
-                          Duration duracionPrevista, String enlace) {
-        this.invitados = invitados;
-        this.organizador = organizador;
-        this.fecha = fecha;
-        this.horaPrevista = horaPrevista;
-        this.duracionPrevista = duracionPrevista;
+    public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace){
+        super(organizador, fecha, horaPrevista, duracionPrevista);
         this.enlace = enlace;
-        this.invitaciones = new HashMap<>();
-        this.asistentesPresentes = new ArrayList<>();
-        this.asistentesAusentes = new ArrayList<>();
-        this.asistentesTarde = new ArrayList<>();
     }
 
     @Override
     public void agregarInvitacion(Empleado invitado, Invitacion invitacion) {
-        if (invitaciones == null) {
-            invitaciones = new HashMap<>();
-        }
-        invitaciones.put(invitado, invitacion);
+        invitacion.setInvitado(invitado);
+        getInvitados().add(invitacion);
     }
 
     // Método para marcar asistencia
     public void marcarAsistencia(Asistencia asistencia) {
         switch (asistencia.getEstado()) {
             case PRESENTE:
-                asistentesPresentes.add(asistencia);
+                getAsistentesPresentes().add(asistencia);
                 break;
             case AUSENTE:
-                asistentesAusentes.add(asistencia);
+                getAsistentesAusentes().add(asistencia);
                 break;
             case TARDE:
-                asistentesTarde.add(asistencia);
+                getAsistentesTarde().add(asistencia);
                 break;
         }
     }
@@ -61,9 +46,8 @@ class ReunionVirtual extends Reunion {
     }
 
     @Override
-    public List<Asistencia> obtenerAsistencia() {
-
-        return asistentesPresentes;
+    public int obtenerAsistencia() {
+        return getAsistentesAusentes();
     }
 
     @Override
