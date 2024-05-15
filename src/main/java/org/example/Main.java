@@ -85,9 +85,9 @@ public class Main {
         }
 
         // Acceder y imprimir las listas de asistentes desde el main
-        List<Asistencia> presentes = reunionVirtual.getAsistentesPresentes();
-        List<Asistencia> ausentes = reunionVirtual.getAsistentesAusentes();
-        List<Asistencia> tarde = reunionVirtual.getAsistentesTarde();
+        List<Asistencia> presentes = reunionVirtual.asistentesPresentes;
+        List<Asistencia> ausentes = reunionVirtual.asistentesAusentes;
+        List<Asistencia> tarde = reunionVirtual.asistentesTarde;
 
         // Imprimir el número de asistentes presentes
         System.out.println("Número de asistentes presentes: " + presentes.size());

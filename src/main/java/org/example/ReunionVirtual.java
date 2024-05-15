@@ -16,20 +16,20 @@ class ReunionVirtual extends Reunion {
     @Override
     public void agregarInvitacion(Empleado invitado, Invitacion invitacion) {
         invitacion.setInvitado(invitado);
-        getInvitados().add(invitacion);
+        invitados.add(invitacion);
     }
 
     // Método para marcar asistencia
     public void marcarAsistencia(Asistencia asistencia) {
         switch (asistencia.getEstado()) {
             case PRESENTE:
-                getAsistentesPresentes().add(asistencia);
+                asistentesPresentes.add(asistencia);
                 break;
             case AUSENTE:
-                getAsistentesAusentes().add(asistencia);
+                asistentesAusentes.add(asistencia);
                 break;
             case TARDE:
-                getAsistentesTarde().add(asistencia);
+                asistentesTarde.add(asistencia);
                 break;
         }
     }
@@ -42,29 +42,29 @@ class ReunionVirtual extends Reunion {
 
     @Override
     public List<Asistencia> obtenerAsistencia() {
-        return getAsistentesPresentes();
+        return asistentesPresentes;
     }
 
     @Override
     public List<Asistencia> obtenerAusencias() {
-        return getAsistentesAusentes();
+        return asistentesAusentes;
     }
 
     @Override
     public List<Asistencia> obtenerRetrasos() {
-        return getAsistentesTarde();
+        return asistentesTarde;
     }
 
     @Override
     public int obtenerTotalAsistencia() {
         // Lógica para calcular el total de asistentes a la reunión virtual
-        return getAsistentesPresentes().size() + getAsistentesTarde().size();
+        return asistentesPresentes.size() + asistentesTarde.size();
     }
 
     @Override
     public float obtenerPorcentajeAsistencia() {
         // Lógica para calcular el porcentaje de asistencia a la reunión virtual
-        int totalInvitados = getInvitados().size();
+        int totalInvitados = invitados.size();
         int totalAsistentes = obtenerTotalAsistencia();
         return (totalAsistentes / (float) totalInvitados) * 100;
     }
@@ -73,10 +73,10 @@ class ReunionVirtual extends Reunion {
     public float calcularTiempoReal() {
         // Lógica para calcular el tiempo real de la reunión virtual
         // Puede depender de la duración de la reunión y de cualquier retraso registrado
-        if (getHoraInicio() == null || getHoraFin() == null) {
+        if (horaInicio == null || horaFin == null) {
             return 0;
         }
-        return Duration.between(getHoraInicio(), getHoraFin()).toMinutes();
+        return Duration.between(horaInicio, horaFin).toMinutes();
     }
 
     @Override

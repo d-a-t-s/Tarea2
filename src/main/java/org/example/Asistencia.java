@@ -5,7 +5,7 @@ import java.time.Instant;
 public class Asistencia {
     private Empleado empleado;
     private EstadoAsistencia estado;
-    private Instant horaLlegadaTarde;
+    private Instant horaLlegada;
 
     // Constructor
     public Asistencia(Empleado empleado, EstadoAsistencia estado) {
@@ -31,17 +31,17 @@ public class Asistencia {
     }
 
     public Instant getHoraLlegadaTarde() {
-        return horaLlegadaTarde;
+        return horaLlegada;
     }
 
-    public void setHoraLlegadaTarde(Instant horaLlegadaTarde) {
-        this.horaLlegadaTarde = horaLlegadaTarde;
+    public void setHoraLlegadaTarde(Instant horaLlegada) {
+        this.horaLlegada = horaLlegada;
     }
 
     // Método para marcar al empleado como llegado tarde
-    public void marcarLlegadaTarde(Instant horaLlegadaTarde) {
+    public void marcarLlegadaTarde(Instant horaLlegada) {
         this.estado = EstadoAsistencia.TARDE;
-        this.horaLlegadaTarde = horaLlegadaTarde;
+        this.horaLlegada = horaLlegada;
     }
 
     // Método para marcar al empleado como ausente

@@ -40,37 +40,5 @@ abstract class Reunion{
     public abstract float calcularTiempoReal();
     public abstract void iniciar();
     public abstract void finalizar();
-
-    //Getter
-    public List<Invitacion> getInvitados(){
-        return invitados;
-    }
-    public List<Asistencia> getAsistentesPresentes() {
-        return asistentesPresentes;
-    }
-    public List<Asistencia> getAsistentesTarde() {
-        return asistentesTarde;
-    }
-    public List<Asistencia> getAsistentesAusentes() {
-        return asistentesAusentes;
-    }
-    public Empleado getOrganizador() {
-        return organizador;
-    }
-    public LocalDate getFecha() {
-        return fecha;
-    }
-    public Instant getHoraPrevista() {
-        return horaPrevista;
-    }
-    public Duration getDuracionPrevista() {
-        return duracionPrevista;
-    }
-    public Instant getHoraInicio() {
-        return horaInicio;
-    }
-    public Instant getHoraFin() {
-        return horaFin;
-    }
 }
 
