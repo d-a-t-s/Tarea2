@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 class ReunionVirtual extends Reunion {
@@ -23,7 +22,6 @@ class ReunionVirtual extends Reunion {
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
         this.enlace = enlace;
-        this.invitaciones = new HashMap<>();
         this.asistentesPresentes = new ArrayList<>();
         this.asistentesAusentes = new ArrayList<>();
         this.asistentesTarde = new ArrayList<>();
