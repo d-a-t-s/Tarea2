@@ -1,8 +1,7 @@
 package org.example;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 class ReunionVirtual extends Reunion {
@@ -83,15 +82,21 @@ class ReunionVirtual extends Reunion {
     @Override
     public void iniciar() {
         // Lógica para iniciar la reunión virtual
-        System.out.println("La reunión virtual ha comenzado.");
         horaInicio = Instant.now();
+        LocalDateTime fechaHoraInicio = LocalDateTime.ofInstant(horaInicio, ZoneId.systemDefault());
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyy");
+        String horaInicioFormateada = fechaHoraInicio.format(formateador);
+        System.out.println("La reunión virtual ha comenzado a las " + horaInicioFormateada);
     }
 
     @Override
     public void finalizar() {
         // Lógica para finalizar la reunión virtual
-        System.out.println("La reunión virtual ha finalizado.");
         horaFin = Instant.now();
+        LocalDateTime fechaHoraFin = LocalDateTime.ofInstant(horaInicio, ZoneId.systemDefault());
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyy");
+        String horaFinFormateada = fechaHoraFin.format(formateador);
+        System.out.println("La reunión virtual ha finalizado a las" + horaFinFormateada);
     }
 
 
