@@ -1,0 +1,145 @@
+@startuml
+
+abstract class Reunion {
+    # invitados : List
+    #asistentes : List<Asistencia>
+    #organizador : empleado
+    #fecha : LocalDate
+    # horaPrevista: Instant
+    # duracionPrevista: Duration
+    # horaInicio: Instant
+    # horaFin: Instant
+    # invitaciones : Map<Invitable, Invitacion>
+
+    +abstract ingresarReunion() : void
+    +abstract obtenerAsistencia() : List
+    +abstract obtenerAusencias() : List
+    +abstract ontenerRetrasos() : List
+    +abstract obtenerTotalAsistencia() : int
+    +abstract obtenerPorcentajeAsistencia() : float
+    +abstract calcularTiempoReal() : float
+    +abstract iniciar() : void
+    +abstract finalizar() : void
+    +abstract agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+}
+
+enum TipoReunion {
+  * Tecnica
+  * Maketing
+  * Otro
+}
+
+enum EstadoAsistencia {
+    * Presente
+    * Ausente
+    * Tarde
+}
+
+class Nota {
+  - contenido : String
+
+  +getContenido() : String
+  +setContenido(String contenido) : Void
+  +toString() : String
+}
+
+class Invitacion {
+  - hora : Instant
+
+  +getHora() : Instant
+  +setHora(Instant hora) : void
+}
+
+class Asistencia {
+    - empleado : Empleado
+    - estado : EstadoAsistencia
+
+    + getEmpleado() : empleado
+    + getEstado() : EstadoAsistencia
+}
+
+interface Invitable {
+
+    +invitar(Reunion reunion, Instant horaInvitacion) : void
+}
+
+class ReunionVirtual {
+    - enlace : String
+
+    + ingresarReunion() : void
+    + obtenerAsistencia() : List
+    + obtenerAusencias() : List
+    + ontenerRetrasos() : List
+    + obtenerTotalAsistencia() : int
+    + obtenerPorcentajeAsistencia() : float
+    + calcularTiempoReal() : float
+    + iniciar() : void
+    + finalizar() : void
+    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+}
+
+class ReunionPresencial {
+    - sala : String
+
+    + ingresarReunion() : void
+        + obtenerAsistencia() : List
+        + obtenerAusencias() : List
+        + ontenerRetrasos() : List
+        + obtenerTotalAsistencia() : int
+        + obtenerPorcentajeAsistencia() : float
+        + calcularTiempoReal() : float
+        + iniciar() : void
+        + finalizar() : void
+        + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+}
+
+class Retraso {
+    - horaLllegadaTarde : Instant
+
+    +getHoraLlegadaTarde() : Instant
+}
+
+class Empleado {
+    - id : Int
+    - apellidos : String
+    - nombre : String
+    - correo : String
+    - departamento : Departamento
+
+    +getId() : Int
+    +getNombre() : String
+    +getApellido() : String
+    +getCorreo() : String
+    +getDepartamento() : Departamento
+    +invitar(Reunion reunion, Instant horaInvitacion) : void
+
+
+}
+
+class Departamento {
+    - nombre : String
+    - empleados : List<Empleado>
+
+    +addEmpleado(Empleado empleado) : void
+    +getNombre() : String
+    +getEmpleado() : List<Empleado>
+    +obtenerCantidadEmpleados() : int
+    +invitar(Reunion reunion, Instant horaInvitacion) : void
+}
+
+Nota --* Reunion
+Asistencia --* Reunion
+Invitacion --* Reunion
+ReunionVirtual --|> Reunion
+ReunionPresencial --|> Reunion
+Reunion --> TipoReunion
+Invitacion --> Invitable
+Retraso --|> Asistencia
+Reunion  --> Empleado: organizado por
+Empleado --o Departamento
+Empleado ..|> Invitable
+Departamento ..|> Invitable
+Asistencia --> EstadoAsistencia
+Retraso --> EstadoAsistencia
+
+@enduml
