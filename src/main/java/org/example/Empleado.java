@@ -14,6 +14,7 @@ public class Empleado implements Invitable {
         this.apellidos = apellidos;
         this.correo = correo;
         this.departamento = departamento;
+        departamento.agregarEmpleado(this);
     }
 
     // Métodos getters y setters

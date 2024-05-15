@@ -23,14 +23,25 @@ public class Main {
         Empleado empleado6 = new Empleado(6, "Sofía", "Hernández", "sofia@example.com", otro);
         Empleado empleado7 = new Empleado(7, "Luis", "Díaz", "luis@example.com", marketing);
 
-        // Agregar empleados a la lista de invitados
+        //Invitar a todo el departamento
+        for (Empleado empleado : marketing.getEmpleados()) {
+            invitados.add(empleado);
+        }
+
+        System.out.println("Empleados del departamento " + marketing.getNombre() + ":");
+        for (Empleado empleado : marketing.getEmpleados()) {
+            System.out.println(empleado.getNombre() + " " + empleado.getApellidos());
+        }
+
+
+        /*// Agregar empleados a la lista de invitados
         invitados.add(empleado1);
         invitados.add(empleado2);
         invitados.add(empleado3);
         invitados.add(empleado4);
         invitados.add(empleado5);
         invitados.add(empleado6);
-        invitados.add(empleado7);
+        invitados.add(empleado7); */
 
         // Crear una instancia de organizador
         Empleado organizador = empleado1; // Podría ser cualquier empleado

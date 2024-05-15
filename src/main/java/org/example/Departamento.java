@@ -38,7 +38,5 @@ public class Departamento implements Invitable {
     public int obtenerNumeroEmpleados() {
         return empleados.size();
     }
-
-    // Otros métodos que consideres necesarios para la gestión del departamento
 }
 
