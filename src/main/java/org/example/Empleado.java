@@ -9,6 +9,23 @@ public class Empleado implements Invitable {
 
     // Constructor
     public Empleado(int id, String nombre, String apellidos, String correo, Departamento departamento) {
+
+        if (id <= 0) {
+            throw new IllegalArgumentException("El ID del empleado debe ser mayor que cero.");
+        }
+        if (nombre == null || nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre del empleado no puede estar vacío.");
+        }
+        if (apellidos == null || apellidos.isEmpty()) {
+            throw new IllegalArgumentException("Los apellidos del empleado no pueden estar vacíos.");
+        }
+        if (correo == null || correo.isEmpty()) {
+            throw new IllegalArgumentException("El correo electrónico del empleado no puede estar vacío.");
+        }
+        if (departamento == null) {
+            throw new IllegalArgumentException("El departamento del empleado no puede ser nulo.");
+        }
+
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;

@@ -11,6 +11,11 @@ class ReunionVirtual extends Reunion {
     // Constructor
     public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace){
         super(organizador, fecha, horaPrevista, duracionPrevista);
+
+        if (enlace == null || enlace.isEmpty()) {
+            throw new CampoVacioException("El enlace de la reunión virtual no puede estar vacío.");
+        }
+
         this.enlace = enlace;
     }
 
@@ -51,6 +56,12 @@ class ReunionVirtual extends Reunion {
     //Metodo para agregar una lista de invitados
     @Override
     public void ingresarReunion(List<Invitacion> invitados){
+
+        if (invitados == null || invitados.isEmpty()) {
+            throw new CampoVacioException("La lista de invitados no puede estar vacía o ser nula.");
+        }
+
+
         for (Invitacion invitacion : invitados){
             Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
             if(asistencia.getHoraLlegada().isBefore(horaPrevista)){
@@ -122,6 +133,11 @@ class ReunionVirtual extends Reunion {
 
     @Override
     public void finalizar() {
+
+        if (horaInicio == null) {
+            throw new ReunionNoIniciadaException("No se puede finalizar una reunión que no ha sido iniciada.");
+        }
+
         horaFin = Instant.now();
         LocalDateTime fechaHoraFin = LocalDateTime.ofInstant(horaInicio, ZoneId.systemDefault());
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyy");

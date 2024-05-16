@@ -9,6 +9,11 @@ public class Nota{
      * @param contenido El contenido de la nota.
      */
     public Nota(String contenido) {
+
+        if (contenido == null || contenido.isEmpty()) {
+            throw new IllegalArgumentException("El contenido de la nota no puede estar vacío.");
+        }
+
         this.contenido = contenido;
     }
 
