@@ -13,8 +13,8 @@ public class Informe{
         escritor = null;
     }
 
-    public void InformeVirtual(ReunionVirtual reunion) throws IOException{
-        try {
+    public void hacerInforme(ReunionVirtual reunion) throws IOException{
+        try{
             archivo = new FileWriter("Informe\\Informe.txt");
             escritor = new PrintWriter(archivo);
             escritor.println("INFORME DE LA REUNION");
@@ -32,9 +32,31 @@ public class Informe{
             for(Nota nota : reunion.notas){
                 escritor.println(nota.getContenido());
             }
-        } catch(IOException ex){
+        }catch(IOException ex){
             System.out.println(ex.getMessage());
         }
     }
-
+    public void hacerInforme(ReunionPresencial reunion) throws IOException{
+        try{
+            archivo = new FileWriter("Informe\\Informe.txt");
+            escritor = new PrintWriter(archivo);
+            escritor.println("INFORME DE LA REUNION");
+            escritor.println("Fecha de la reunion: " + reunion.getFecha());
+            escritor.println("Hora de inicio: " + reunion.getHoraInicio() + " Hora de fin: " + reunion.getHoraFin() + " Duracion total: " + reunion.calcularTiempoReal());
+            escritor.println("Enlace: " + reunion.getSala());
+            escritor.println("Lista de participantes: ");
+            for(Asistencia asistente : reunion.asistentesPresentes){
+                escritor.println(asistente.getEmpleado().getNombre() + " " + asistente.getEmpleado().getApellidos());
+            }
+            for(Asistencia asistente : reunion.asistentesTarde){
+                escritor.println(asistente.getEmpleado().getNombre() + " " + asistente.getEmpleado().getApellidos());
+            }
+            escritor.println("Notas de la reunion: ");
+            for(Nota nota : reunion.notas){
+                escritor.println(nota.getContenido());
+            }
+        }catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 }

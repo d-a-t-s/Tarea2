@@ -150,4 +150,8 @@ class ReunionPresencial extends Reunion {
         String horaFinFormateada = fechaHoraFin.format(formateador);
         System.out.println("La reunión virtual ha finalizado a las" + horaFinFormateada);
     }
+
+    public String getSala(){
+        return sala;
+    }
 }

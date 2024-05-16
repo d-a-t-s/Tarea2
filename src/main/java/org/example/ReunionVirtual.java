@@ -11,11 +11,9 @@ class ReunionVirtual extends Reunion {
     // Constructor
     public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace) {
         super(organizador, fecha, horaPrevista, duracionPrevista);
-
-        if (enlace == null || enlace.isEmpty()) {
+        if (enlace == null || enlace.isEmpty()){
             throw new CampoVacioException("El enlace de la reunión virtual no puede estar vacío.");
         }
-
         this.enlace = enlace;
     }
 
@@ -45,11 +43,9 @@ class ReunionVirtual extends Reunion {
                 break;
         }
     }
-
     //Metodo para agregar a la reunion uno por uno
     @Override
-    public void ingresarReunion(Invitacion invitacion) {
-        List<Invitacion> copiaInvitado = new ArrayList<>(invitados);
+    public void ingresarReunion(Invitacion invitacion){
         Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
         if (asistencia.getHoraLlegada().isBefore(horaPrevista)) {
             asistencia.setEstado(EstadoAsistencia.PRESENTE);
@@ -58,7 +54,6 @@ class ReunionVirtual extends Reunion {
             asistencia.setEstado(EstadoAsistencia.TARDE);
             asistentesTarde.add(asistencia);
         }
-        copiaInvitado.remove(invitacion);
     }
 
     //Metodo para agregar una lista de invitados
@@ -85,7 +80,6 @@ class ReunionVirtual extends Reunion {
     @Override
     public List<Asistencia> obtenerAsistencia() {
         return asistentesPresentes;
-
     }
 
     @Override
