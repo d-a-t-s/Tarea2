@@ -15,7 +15,7 @@ public class Informe{
 
     public void InformeVirtual(ReunionVirtual reunion) throws IOException{
         try {
-            archivo = new FileWriter("C:\\Users\\Daniel Tamaro\\Desktop\\Programacion\\Repositorios\\Tarea2\\Informe\\Informe.txt");
+            archivo = new FileWriter("Tarea2\\Informe\\Informe.txt");
             escritor = new PrintWriter(archivo);
             escritor.println("INFORME DE LA REUNION");
             escritor.println("Fecha de la reunion: " + reunion.getFecha());
