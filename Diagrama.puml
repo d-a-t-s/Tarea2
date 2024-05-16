@@ -1,6 +1,7 @@
 @startuml
 
 abstract class Reunion {
+    # notas : List<Nota>
     # invitados : List<Invitacion>
     #asistentesPresentes : List<Asistencia>
     #asistentesTarde : List<Asistencia>
@@ -12,6 +13,7 @@ abstract class Reunion {
     # horaInicio: Instant
     # horaFin: Instant
 
+    +abstract agregarNota(String texto) : void
     +abstract agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
     +abstract ingresarReunion() : void
     +abstract obtenerAsistencia() : List<Asistencia>
@@ -22,6 +24,26 @@ abstract class Reunion {
     +abstract calcularTiempoReal() : float
     +abstract iniciar() : void
     +abstract finalizar() : void
+    + getInvitados(): List<Invitacion>
+    + getAsistentesPresentes(): List<Asistencia>
+    + getAsistentesTarde(): List<Asistencia>
+    + getAsistentesAusentes(): List<Asistencia>
+    + getOrganizador(): Empleado
+    + getFecha(): LocalDate
+    + getHoraPrevista(): Instant
+    + getDuracionPrevista(): Duration
+    + getHoraInicio(): Instant
+    + getHoraFin(): Instant
+    + setInvitados(invitados: List<Invitacion>): void
+    + setAsistentesPresentes(asistentesPresentes: List<Asistencia>): void
+    + setAsistentesTarde(asistentesTarde: List<Asistencia>): void
+    + setAsistentesAusentes(asistentesAusentes: List<Asistencia>): void
+    + setOrganizador(organizador: Empleado): void
+    + setFecha(fecha: LocalDate): void
+    + setHoraPrevista(horaPrevista: Instant): void
+    + setDuracionPrevista(duracionPrevista: Duration): void
+    + setHoraInicio(horaInicio: Instant): void
+    + setHoraFin(horaFin: Instant): void
 }
 
 enum TipoReunion {
@@ -49,6 +71,7 @@ class Invitacion {
   - invitado : Empleado
 
   +getHora() : Instant
+  +serHora(Instant hora) : void
   +getInvitado() : Empleado
   +setInvitado(Empleado empleado) : void
 }
@@ -59,8 +82,16 @@ class Asistencia {
     - horaLlegada : Instant
 
     + getEmpleado() : empleado
+    + setEmpleado(Empleado empleado) : void
     + getEstado() : EstadoAsistencia
+    + setEstado(EstadoAsistencia estado) : void
+    + getHoraLlegada() : Instant
+    + setHoraLllegada(Instant horaLlegada) : void
+    + marcarLlegada(Instant horaLlegada) : void
+    + marcarAusente() : void
+    + marcarPresente() : void
 }
+
 
 interface Invitable {
 
@@ -86,21 +117,23 @@ class ReunionPresencial {
     - sala : String
 
     + ingresarReunion() : void
-        + obtenerAsistencia() : List
-        + obtenerAusencias() : List
-        + ontenerRetrasos() : List
-        + obtenerTotalAsistencia() : int
-        + obtenerPorcentajeAsistencia() : float
-        + calcularTiempoReal() : float
-        + iniciar() : void
-        + finalizar() : void
-        + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+    + obtenerAsistencia() : List
+    + obtenerAusencias() : List
+    + ontenerRetrasos() : List
+    + obtenerTotalAsistencia() : int
+    + obtenerPorcentajeAsistencia() : float
+    + calcularTiempoReal() : float
+    + iniciar() : void
+    + finalizar() : void
+    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+    + getInvitado() : List<Invitacion>
+    +
 }
 
 class Empleado {
     - id : Int
-    - apellidos : String
     - nombre : String
+    - apellidos : String
     - correo : String
     - departamento : Departamento
 
@@ -108,8 +141,8 @@ class Empleado {
     +setId(Int id) : Int
     +getNombre() : String
     +setNombre(String Nombre) : Void
-    +getApellido() : String
-    +setApellido(String apellidos) : Void
+    +getApellidos() : String
+    +setApellidos(String apellidos) : Void
     +getCorreo() : String
     +setCorreo(String correo) : Void
     +getDepartamento() : Departamento
