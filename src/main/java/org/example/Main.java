@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -106,6 +107,13 @@ public class Main {
         for (Asistencia asistencia : tarde) {
             System.out.println("Empleado: " + asistencia.getEmpleado().getNombre() +
                     ", Hora de llegada tarde: " + asistencia.getHoraLlegada());
+        }
+        // Crear una instancia de Informe y generar el informe
+        Informe informe = new Informe();
+        try {
+            informe.InformeVirtual(reunionVirtual);
+        } catch (IOException e) {
+            System.out.println("Error al generar el informe: " + e.getMessage());
         }
     }
 }
