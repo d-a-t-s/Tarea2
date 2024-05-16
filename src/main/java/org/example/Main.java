@@ -73,11 +73,11 @@ public class Main {
             if (empleado.getId() == 1) {
                 // Marcar a empleado1 como llegada tarde
                 asistencia = new Asistencia(empleado, EstadoAsistencia.TARDE);
-<<<<<<< HEAD
+
                 asistencia.setHoraLlegada(Instant.now()); // Suponiendo que llega tarde en el momento actual
-=======
-                asistencia.setHoraLlegadaTarde(Instant.now()); // Suponiendo que llega tarde en el momento actual
->>>>>>> 54ed296a723b4739fda23d97662f103eee109b2c
+
+                // asistencia.setHoraLlegadaTarde(Instant.now()); // Suponiendo que llega tarde en el momento actual
+
             } else if (empleado.getId() == 3 || empleado.getId() == 5) {
                 // Marcar a empleado3 y empleado5 como presentes
                 asistencia = new Asistencia(empleado, EstadoAsistencia.PRESENTE);
