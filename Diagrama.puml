@@ -12,6 +12,7 @@ abstract class Reunion {
     # duracionPrevista: Duration
     # horaInicio: Instant
     # horaFin: Instant
+    # tipoReunion : TipoReunion
 
     +abstract agregarNota(String texto) : void
     +abstract agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
@@ -34,6 +35,8 @@ abstract class Reunion {
     + getDuracionPrevista(): Duration
     + getHoraInicio(): Instant
     + getHoraFin(): Instant
+    +getTipoReunion() : TipoReunion
+    + getNotas() : List<Nota>
     + setInvitados(invitados: List<Invitacion>): void
     + setAsistentesPresentes(asistentesPresentes: List<Asistencia>): void
     + setAsistentesTarde(asistentesTarde: List<Asistencia>): void
@@ -44,12 +47,14 @@ abstract class Reunion {
     + setDuracionPrevista(duracionPrevista: Duration): void
     + setHoraInicio(horaInicio: Instant): void
     + setHoraFin(horaFin: Instant): void
+    + setTipoReunion(TipoReunion tipoReunion) : void
+    + setNotas(List<Nota> notas) : void
 }
 
 enum TipoReunion {
-  * Tecnica
-  * Maketing
-  * Otro
+  * MARKETING
+  * TECNICA
+  * OTRO
 }
 
 enum EstadoAsistencia {
@@ -101,6 +106,8 @@ interface Invitable {
 class ReunionVirtual {
     - enlace : String
 
+    + agregarNota(String texto) : void
+    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
     + ingresarReunion() : void
     + obtenerAsistencia() : List
     + obtenerAusencias() : List
@@ -110,12 +117,15 @@ class ReunionVirtual {
     + calcularTiempoReal() : float
     + iniciar() : void
     + finalizar() : void
-    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+    +getEnlace() : String
+
 }
 
 class ReunionPresencial {
     - sala : String
 
+    + agregarNota(String texto) : void
+    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
     + ingresarReunion() : void
     + obtenerAsistencia() : List
     + obtenerAusencias() : List
@@ -125,9 +135,7 @@ class ReunionPresencial {
     + calcularTiempoReal() : float
     + iniciar() : void
     + finalizar() : void
-    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
-    + getInvitado() : List<Invitacion>
-    +
+    + getSala() : String
 }
 
 class Empleado {
