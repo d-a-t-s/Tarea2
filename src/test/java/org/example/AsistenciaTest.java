@@ -8,7 +8,7 @@ public class AsistenciaTest {
 
     @Test
     public void testConstructor() {
-        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com", new Departamento("Departamento"));
+        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example9.com");
         EstadoAsistencia estado = EstadoAsistencia.PRESENTE;
         Instant horaLlegada = Instant.now();
 
@@ -31,7 +31,7 @@ public class AsistenciaTest {
 
     @Test
     public void testConstructor_EstadoNulo() {
-        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com", new Departamento("Departamento"));
+        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
 
         assertThrows(CampoVacioException.class, () -> {
             Asistencia asistencia = new Asistencia(empleado, null);
@@ -40,7 +40,7 @@ public class AsistenciaTest {
 
     @Test
     public void testMarcarLlegada() {
-        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com", new Departamento("Departamento"));
+        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
         EstadoAsistencia estado = EstadoAsistencia.AUSENTE;
         Instant horaLlegada = Instant.now();
 
@@ -53,7 +53,7 @@ public class AsistenciaTest {
 
     @Test
     public void testMarcarAusente() {
-        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com", new Departamento("Departamento"));
+        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
         EstadoAsistencia estado = EstadoAsistencia.PRESENTE;
 
         Asistencia asistencia = new Asistencia(empleado, estado);
@@ -64,7 +64,7 @@ public class AsistenciaTest {
 
     @Test
     public void testMarcarPresente() {
-        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com", new Departamento("Departamento"));
+        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
         EstadoAsistencia estado = EstadoAsistencia.AUSENTE;
 
         Asistencia asistencia = new Asistencia(empleado, estado);

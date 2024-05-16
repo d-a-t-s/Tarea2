@@ -9,7 +9,7 @@ class ReunionVirtual extends Reunion {
     private String enlace;
 
     // Constructor
-    public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace){
+    public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace) {
         super(organizador, fecha, horaPrevista, duracionPrevista);
 
         if (enlace == null || enlace.isEmpty()) {
@@ -18,11 +18,13 @@ class ReunionVirtual extends Reunion {
 
         this.enlace = enlace;
     }
+
     @Override
-    public void agregarNota(String texto){
+    public void agregarNota(String texto) {
         Nota nota = new Nota(texto);
         notas.add(nota);
     }
+
     @Override
     public void agregarInvitacion(Empleado invitado, Invitacion invitacion) {
         invitacion.setInvitado(invitado);
@@ -31,7 +33,7 @@ class ReunionVirtual extends Reunion {
 
     // Método para marcar asistencia
     public void marcarAsistencia(Asistencia asistencia) {
-        switch (asistencia.getEstado()){
+        switch (asistencia.getEstado()) {
             case PRESENTE:
                 asistentesPresentes.add(asistencia);
                 break;
@@ -43,35 +45,37 @@ class ReunionVirtual extends Reunion {
                 break;
         }
     }
+
     //Metodo para agregar a la reunion uno por uno
     @Override
-    public void ingresarReunion(Invitacion invitacion){
+    public void ingresarReunion(Invitacion invitacion) {
         List<Invitacion> copiaInvitado = new ArrayList<>(invitados);
         Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
-        if(asistencia.getHoraLlegada().isBefore(horaPrevista)){
+        if (asistencia.getHoraLlegada().isBefore(horaPrevista)) {
             asistencia.setEstado(EstadoAsistencia.PRESENTE);
             asistentesPresentes.add(asistencia);
-        } else if(asistencia.getHoraLlegada().isAfter(horaPrevista)){
+        } else if (asistencia.getHoraLlegada().isAfter(horaPrevista)) {
             asistencia.setEstado(EstadoAsistencia.TARDE);
             asistentesTarde.add(asistencia);
         }
         copiaInvitado.remove(invitacion);
     }
+
     //Metodo para agregar una lista de invitados
     @Override
-    public void ingresarReunion(List<Invitacion> invitados){
+    public void ingresarReunion(List<Invitacion> invitados) {
 
         if (invitados == null || invitados.isEmpty()) {
             throw new CampoVacioException("La lista de invitados no puede estar vacía o ser nula.");
         }
 
 
-        for (Invitacion invitacion : invitados){
+        for (Invitacion invitacion : invitados) {
             Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
-            if(asistencia.getHoraLlegada().isBefore(horaPrevista)){
+            if (asistencia.getHoraLlegada().isBefore(horaPrevista)) {
                 asistencia.setEstado(EstadoAsistencia.PRESENTE);
                 asistentesPresentes.add(asistencia);
-            }else if(asistencia.getHoraLlegada().isAfter(horaPrevista)){
+            } else if (asistencia.getHoraLlegada().isAfter(horaPrevista)) {
                 asistencia.setEstado(EstadoAsistencia.TARDE);
                 asistentesTarde.add(asistencia);
             }
@@ -79,7 +83,7 @@ class ReunionVirtual extends Reunion {
     }
 
     @Override
-    public List<Asistencia> obtenerAsistencia(){
+    public List<Asistencia> obtenerAsistencia() {
         return asistentesPresentes;
 
     }
@@ -90,11 +94,11 @@ class ReunionVirtual extends Reunion {
     }
 
     @Override
-    public List<Asistencia> obtenerAusencias(){
-        for (Invitacion invitado : invitados){
+    public List<Asistencia> obtenerAusencias() {
+        for (Invitacion invitado : invitados) {
             boolean aux = false;
-            for (Asistencia asistente : asistentesPresentes){
-                if (invitado.getInvitado() == asistente.getEmpleado()){
+            for (Asistencia asistente : asistentesPresentes) {
+                if (invitado.getInvitado() == asistente.getEmpleado()) {
                     aux = true;
                 }
             }
@@ -107,7 +111,7 @@ class ReunionVirtual extends Reunion {
     }
 
     @Override
-    public int obtenerTotalAsistencia(){
+    public int obtenerTotalAsistencia() {
         return asistentesPresentes.size() + asistentesTarde.size();
     }
 
@@ -148,10 +152,8 @@ class ReunionVirtual extends Reunion {
         String horaFinFormateada = fechaHoraFin.format(formateador);
         System.out.println("La reunión virtual ha finalizado a las" + horaFinFormateada);
     }
-
     public String getEnlace(){
         return enlace;
     }
-
 }
 

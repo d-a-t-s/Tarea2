@@ -15,14 +15,14 @@ public class Main {
         Departamento marketing = new Departamento("Marketing");
         Departamento otro = new Departamento("Otro");
 
-        Empleado empleado0 = new Empleado(1, "Felipe", "Soto", "felipe@example.com", otro);
-        Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com", marketing);
-        Empleado empleado2 = new Empleado(2, "María", "Gómez", "maria@example.com", otro);
-        Empleado empleado3 = new Empleado(3, "Pedro", "López", "pedro@example.com", marketing);
-        Empleado empleado4 = new Empleado(4, "Ana", "Martínez", "ana@example.com", otro);
-        Empleado empleado5 = new Empleado(5, "Carlos", "García", "carlos@example.com", marketing);
-        Empleado empleado6 = new Empleado(6, "Sofía", "Hernández", "sofia@example.com", otro);
-        Empleado empleado7 = new Empleado(7, "Luis", "Díaz", "luis@example.com", marketing);
+        Empleado empleado0 = new Empleado(1, "Felipe", "Soto", "felipe@example.com");
+        Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com");
+        Empleado empleado2 = new Empleado(2, "María", "Gómez", "maria@example.com");
+        Empleado empleado3 = new Empleado(3, "Pedro", "López", "pedro@example.com");
+        Empleado empleado4 = new Empleado(4, "Ana", "Martínez", "ana@example.com");
+        Empleado empleado5 = new Empleado(5, "Carlos", "García", "carlos@example.com");
+        Empleado empleado6 = new Empleado(6, "Sofía", "Hernández", "sofia@example.com");
+        Empleado empleado7 = new Empleado(7, "Luis", "Díaz", "luis@example.com");
 
         /* //Invitar a todo el departamento
         for (Empleado empleado : marketing.getEmpleados()) {
