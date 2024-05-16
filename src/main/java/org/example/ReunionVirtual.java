@@ -49,7 +49,6 @@ class ReunionVirtual extends Reunion {
     //Metodo para agregar a la reunion uno por uno
     @Override
     public void ingresarReunion(Invitacion invitacion) {
-        List<Invitacion> copiaInvitado = new ArrayList<>(invitados);
         Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
         if (asistencia.getHoraLlegada().isBefore(horaPrevista)) {
             asistencia.setEstado(EstadoAsistencia.PRESENTE);
@@ -58,7 +57,6 @@ class ReunionVirtual extends Reunion {
             asistencia.setEstado(EstadoAsistencia.TARDE);
             asistentesTarde.add(asistencia);
         }
-        copiaInvitado.remove(invitacion);
     }
 
     //Metodo para agregar una lista de invitados
