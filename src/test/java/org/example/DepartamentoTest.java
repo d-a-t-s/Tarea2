@@ -34,7 +34,7 @@ public class DepartamentoTest {
     @Test
     public void testAgregarEmpleado() {
         Departamento departamento = new Departamento("Departamento de Pruebas");
-        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com", departamento);
+        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
 
         departamento.agregarEmpleado(empleado);
 
@@ -44,7 +44,7 @@ public class DepartamentoTest {
     @Test
     public void testRemoverEmpleado() {
         Departamento departamento = new Departamento("Departamento de Pruebas");
-        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com", departamento);
+        Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
 
         departamento.agregarEmpleado(empleado);
         departamento.removerEmpleado(empleado);
@@ -55,8 +55,8 @@ public class DepartamentoTest {
     @Test
     public void testObtenerNumeroEmpleados() {
         Departamento departamento = new Departamento("Departamento de Pruebas");
-        Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com", departamento);
-        Empleado empleado2 = new Empleado(2, "Ana", "García", "ana@example.com", departamento);
+        Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com");
+        Empleado empleado2 = new Empleado(2, "Ana", "García", "ana@example.com");
 
         departamento.agregarEmpleado(empleado1);
         departamento.agregarEmpleado(empleado2);
@@ -70,8 +70,8 @@ public class DepartamentoTest {
         Departamento departamento = new Departamento("Departamento de Pruebas");
 
         // Creamos algunos empleados
-        Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com", departamento);
-        Empleado empleado2 = new Empleado(2, "Ana", "García", "ana@example.com", departamento);
+        Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com");
+        Empleado empleado2 = new Empleado(2, "Ana", "García", "ana@example.com");
 
         // Agregamos los empleados al departamento
         departamento.agregarEmpleado(empleado1);
