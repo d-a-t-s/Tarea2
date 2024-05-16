@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReunionPresencialTest {
+class MainTest {
 
     private Empleado empleado1;
     private Empleado empleado2;
@@ -19,7 +19,7 @@ class ReunionPresencialTest {
     private Empleado empleado6;
     private Departamento departamento1;
     private Departamento departamento2;
-    private ReunionPresencial reunionPresencial;
+    private ReunionVirtual reunionVirtual;
 
     @BeforeEach
     void setUp() {
@@ -43,36 +43,36 @@ class ReunionPresencialTest {
         LocalDate fechaReunion = LocalDate.of(2024, 5, 16);
         Instant horaPrevista = Instant.parse("2024-05-16T09:00:00Z");
         Duration duracionPrevista = Duration.ofHours(1);
-        reunionPresencial = new ReunionPresencial(empleado1, fechaReunion, horaPrevista, duracionPrevista, "Sala A", TipoReunion.MARKETING);
-        departamento1.invitar(reunionPresencial);
-        departamento2.invitar(reunionPresencial);
+        String enlaceReunion = "https://ejemplo.com/reunion";
+        reunionVirtual = new ReunionVirtual(empleado1, fechaReunion, horaPrevista, duracionPrevista, enlaceReunion, TipoReunion.MARKETING);
+        departamento1.invitar(reunionVirtual);
+        departamento2.invitar(reunionVirtual);
     }
 
     @Test
     void testMain() throws InterruptedException {
-        List<Invitacion> invitaciones = reunionPresencial.getInvitados();
+        List<Invitacion> invitaciones = reunionVirtual.getInvitados();
 
-        reunionPresencial.ingresarReunion(invitaciones.get(0));
-        reunionPresencial.ingresarReunion(invitaciones.get(1));
-        reunionPresencial.iniciar();
+        reunionVirtual.ingresarReunion(invitaciones.get(0));
+        reunionVirtual.ingresarReunion(invitaciones.get(1));
+        reunionVirtual.iniciar();
         Thread.sleep(10000);
-        reunionPresencial.agregarNota("Feliz en mi reunion :) XDXDXD");
-        reunionPresencial.ingresarReunion(invitaciones.get(2));
-        reunionPresencial.ingresarReunion(invitaciones.get(3));
-        reunionPresencial.finalizar();
+        reunionVirtual.agregarNota("Feliz en mi reunion :) XDXDXD");
+        reunionVirtual.ingresarReunion(invitaciones.get(2));
+        reunionVirtual.ingresarReunion(invitaciones.get(3));
+        reunionVirtual.finalizar();
 
-        assertEquals(4, reunionPresencial.obtenerTotalAsistencia());
-        assertEquals(66.66667, reunionPresencial.obtenerPorcentajeAsistencia(), 0.00001);
+        assertEquals(4, reunionVirtual.obtenerTotalAsistencia());
+        assertEquals(66.66667, reunionVirtual.obtenerPorcentajeAsistencia(), 0.00001);
 
-        assertEquals(2, reunionPresencial.obtenerAsistencia().size());
-        assertEquals(2, reunionPresencial.obtenerRetrasos().size());
-        assertEquals(2, reunionPresencial.obtenerAusencias().size());
+        assertEquals(2, reunionVirtual.asistentesPresentes.size());
+        assertEquals(2, reunionVirtual.asistentesTarde.size());
 
-        assertTrue(reunionPresencial.getNotas().size() > 0);
+        assertTrue(reunionVirtual.getNotas().size() > 0);
 
         Informe informe = new Informe();
         try {
-            informe.hacerInforme(reunionPresencial);
+            informe.hacerInforme(reunionVirtual);
         } catch (IOException e) {
             fail("Error al generar el informe: " + e.getMessage());
         }

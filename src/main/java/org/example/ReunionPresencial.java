@@ -19,6 +19,9 @@ class ReunionPresencial extends Reunion {
 
     @Override
     public void agregarNota(String texto){
+        if (texto == null || texto.isEmpty()){
+            throw new CampoVacioException("La nota no puede estar vacía");
+        }
         Nota nota = new Nota(texto);
         notas.add(nota);
     }

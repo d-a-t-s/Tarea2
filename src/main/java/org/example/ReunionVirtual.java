@@ -19,6 +19,9 @@ class ReunionVirtual extends Reunion {
 
     @Override
     public void agregarNota(String texto) {
+        if (texto == null || texto.isEmpty()){
+            throw new CampoVacioException("La nota no puede estar vacía");
+        }
         Nota nota = new Nota(texto);
         notas.add(nota);
     }
@@ -110,7 +113,7 @@ class ReunionVirtual extends Reunion {
         LocalDateTime fechaHoraFin = LocalDateTime.ofInstant(horaInicio, ZoneId.systemDefault());
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyy");
         String horaFinFormateada = fechaHoraFin.format(formateador);
-        System.out.println("La reunión virtual ha finalizado a las" + horaFinFormateada);
+        System.out.println("La reunión virtual ha finalizado a las " + horaFinFormateada);
     }
     public String getEnlace(){
         return enlace;
