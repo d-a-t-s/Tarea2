@@ -15,7 +15,7 @@ public class Informe{
 
     public void hacerInforme(ReunionVirtual reunion) throws IOException{
         try{
-            archivo = new FileWriter("Informe\\Informe.txt");
+            archivo = new FileWriter("Informe\\Informe1.txt");
             escritor = new PrintWriter(archivo);
             escritor.println("INFORME DE LA REUNION");
             escritor.println("Fecha de la reunion: " + reunion.getFecha());
@@ -32,6 +32,7 @@ public class Informe{
             for(Nota nota : reunion.notas){
                 escritor.println(nota.getContenido());
             }
+            archivo.close();
         }catch(IOException ex){
             System.out.println(ex.getMessage());
         }
@@ -55,6 +56,7 @@ public class Informe{
             for(Nota nota : reunion.notas){
                 escritor.println(nota.getContenido());
             }
+            archivo.close();
         }catch(IOException ex){
             System.out.println(ex.getMessage());
         }

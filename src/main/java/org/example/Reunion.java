@@ -18,8 +18,9 @@ abstract class Reunion{
     protected Duration duracionPrevista;
     protected Instant horaInicio;
     protected Instant horaFin;
+    protected TipoReunion tipoReunion;
 
-    public Reunion(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista){
+    public Reunion(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, TipoReunion tipoReunion){
         notas = new ArrayList<>();
         invitados = new ArrayList<>();
         asistentesPresentes = new ArrayList<>();
@@ -29,13 +30,13 @@ abstract class Reunion{
         this.fecha = fecha;
         this.horaPrevista = horaPrevista;
         this.duracionPrevista = duracionPrevista;
-        this.horaInicio = null;
-        this.horaFin = null;
+        this.horaInicio = Instant.MAX;
+        this.horaFin = Instant.MAX;
+        this.tipoReunion = tipoReunion;
     }
     public abstract void agregarNota(String texto);
     public abstract void agregarInvitacion(Empleado invitado, Invitacion invitacion);
     public abstract void ingresarReunion(Invitacion inv);
-    public abstract void ingresarReunion(List<Invitacion> invs);
     public abstract List<Asistencia> obtenerAsistencia();
     public abstract List<Asistencia> obtenerAusencias();
     public abstract List<Asistencia> obtenerRetrasos();
@@ -76,6 +77,12 @@ abstract class Reunion{
     public Instant getHoraFin() {
         return horaFin;
     }
+    public TipoReunion getTipoReunion(){
+        return tipoReunion;
+    }
+    public List<Nota> getNotas(){
+        return notas;
+    }
     //Setters
     public void setInvitados(List<Invitacion> invitados) {
         this.invitados = invitados;
@@ -106,6 +113,12 @@ abstract class Reunion{
     }
     public void setHoraFin(Instant horaFin) {
         this.horaFin = horaFin;
+    }
+    public void setTipoReunion(TipoReunion tipoReunion){
+        this.tipoReunion = tipoReunion;
+    }
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
     }
 }
 

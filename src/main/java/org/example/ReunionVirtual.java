@@ -9,8 +9,8 @@ class ReunionVirtual extends Reunion {
     private String enlace;
 
     // Constructor
-    public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace) {
-        super(organizador, fecha, horaPrevista, duracionPrevista);
+    public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace, TipoReunion tipoReunion) {
+        super(organizador, fecha, horaPrevista, duracionPrevista, tipoReunion);
         if (enlace == null || enlace.isEmpty()){
             throw new CampoVacioException("El enlace de la reunión virtual no puede estar vacío.");
         }
@@ -29,51 +29,14 @@ class ReunionVirtual extends Reunion {
         invitados.add(invitacion);
     }
 
-    // Método para marcar asistencia
-    public void marcarAsistencia(Asistencia asistencia) {
-        switch (asistencia.getEstado()) {
-            case PRESENTE:
-                asistentesPresentes.add(asistencia);
-                break;
-            case AUSENTE:
-                asistentesAusentes.add(asistencia);
-                break;
-            case TARDE:
-                asistentesTarde.add(asistencia);
-                break;
-        }
-    }
-    //Metodo para agregar a la reunion uno por uno
-    @Override
-    public void ingresarReunion(Invitacion invitacion) {
+    public void ingresarReunion(Invitacion invitacion){
         Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
-        if (asistencia.getHoraLlegada().isBefore(horaPrevista)) {
+        if(Instant.now().isBefore(horaFin) && !Instant.now().isAfter(horaInicio)){
             asistencia.setEstado(EstadoAsistencia.PRESENTE);
             asistentesPresentes.add(asistencia);
-        } else if (asistencia.getHoraLlegada().isAfter(horaPrevista)) {
+        }else if(Instant.now().isBefore(horaFin)){
             asistencia.setEstado(EstadoAsistencia.TARDE);
             asistentesTarde.add(asistencia);
-        }
-    }
-
-    //Metodo para agregar una lista de invitados
-    @Override
-    public void ingresarReunion(List<Invitacion> invitados) {
-
-        if (invitados == null || invitados.isEmpty()) {
-            throw new CampoVacioException("La lista de invitados no puede estar vacía o ser nula.");
-        }
-
-
-        for (Invitacion invitacion : invitados) {
-            Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
-            if (asistencia.getHoraLlegada().isBefore(horaPrevista)) {
-                asistencia.setEstado(EstadoAsistencia.PRESENTE);
-                asistentesPresentes.add(asistencia);
-            } else if (asistencia.getHoraLlegada().isAfter(horaPrevista)) {
-                asistencia.setEstado(EstadoAsistencia.TARDE);
-                asistentesTarde.add(asistencia);
-            }
         }
     }
 
@@ -88,15 +51,18 @@ class ReunionVirtual extends Reunion {
     }
 
     @Override
-    public List<Asistencia> obtenerAusencias() {
-        for (Invitacion invitado : invitados) {
-            boolean aux = false;
-            for (Asistencia asistente : asistentesPresentes) {
-                if (invitado.getInvitado() == asistente.getEmpleado()) {
-                    aux = true;
+    public List<Asistencia> obtenerAusencias(){
+        List<Asistencia> aux = new ArrayList<>();
+        aux.addAll(asistentesPresentes);
+        aux.addAll(asistentesTarde);
+        for (Invitacion invitado : invitados){
+            boolean val= false;
+            for (Asistencia asistente : aux){
+                if (invitado.getInvitado() == asistente.getEmpleado()){
+                    val = true;
                 }
             }
-            if (aux == false) {
+            if (val == false) {
                 Asistencia ausente = new Asistencia(invitado.getInvitado(), EstadoAsistencia.AUSENTE);
                 asistentesAusentes.add(ausente);
             }
@@ -110,7 +76,7 @@ class ReunionVirtual extends Reunion {
     }
 
     @Override
-    public float obtenerPorcentajeAsistencia() {
+    public float obtenerPorcentajeAsistencia(){
         int totalInvitados = invitados.size();
         int totalAsistentes = obtenerTotalAsistencia();
         return (totalAsistentes / (float) totalInvitados) * 100;

@@ -9,13 +9,11 @@ class ReunionPresencial extends Reunion {
     private String sala;
 
     // Constructor
-    public ReunionPresencial(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String sala){
-        super(organizador, fecha, horaPrevista, duracionPrevista);
-
+    public ReunionPresencial(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String sala, TipoReunion tipoReunion){
+        super(organizador, fecha, horaPrevista, duracionPrevista, tipoReunion);
         if (sala == null || sala.isEmpty()) {
             throw new CampoVacioException("Debe existir una sala.");
         }
-
         this.sala = sala;
     }
 
@@ -31,52 +29,15 @@ class ReunionPresencial extends Reunion {
         invitados.add(invitacion);
     }
 
-    // Método para marcar asistencia
-    public void marcarAsistencia(Asistencia asistencia) {
-        switch (asistencia.getEstado()){
-            case PRESENTE:
-                asistentesPresentes.add(asistencia);
-                break;
-            case AUSENTE:
-                asistentesAusentes.add(asistencia);
-                break;
-            case TARDE:
-                asistentesTarde.add(asistencia);
-                break;
-        }
-    }
     //Metodo para agregar a la reunion uno por uno
-    @Override
     public void ingresarReunion(Invitacion invitacion){
-        List<Invitacion> copiaInvitado = new ArrayList<>(invitados);
         Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
-        if(asistencia.getHoraLlegada().isBefore(horaPrevista)){
+        if(Instant.now().isBefore(horaFin) && !Instant.now().isAfter(horaInicio)){
             asistencia.setEstado(EstadoAsistencia.PRESENTE);
             asistentesPresentes.add(asistencia);
-        } else if(asistencia.getHoraLlegada().isAfter(horaPrevista)){
+        }else if(Instant.now().isBefore(horaFin)){
             asistencia.setEstado(EstadoAsistencia.TARDE);
             asistentesTarde.add(asistencia);
-        }
-        copiaInvitado.remove(invitacion);
-    }
-    //Metodo para agregar una lista de invitados
-    @Override
-    public void ingresarReunion(List<Invitacion> invitados){
-
-        if (invitados == null || invitados.isEmpty()) {
-            throw new CampoVacioException("La lista de invitados no puede estar vacía o ser nula.");
-        }
-
-
-        for (Invitacion invitacion : invitados){
-            Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
-            if(asistencia.getHoraLlegada().isBefore(horaPrevista)){
-                asistencia.setEstado(EstadoAsistencia.PRESENTE);
-                asistentesPresentes.add(asistencia);
-            }else if(asistencia.getHoraLlegada().isAfter(horaPrevista)){
-                asistencia.setEstado(EstadoAsistencia.TARDE);
-                asistentesTarde.add(asistencia);
-            }
         }
     }
 
@@ -93,14 +54,17 @@ class ReunionPresencial extends Reunion {
 
     @Override
     public List<Asistencia> obtenerAusencias(){
+        List<Asistencia> aux = new ArrayList<>();
+        aux.addAll(asistentesPresentes);
+        aux.addAll(asistentesTarde);
         for (Invitacion invitado : invitados){
-            boolean aux = false;
-            for (Asistencia asistente : asistentesPresentes){
+            boolean val= false;
+            for (Asistencia asistente : aux){
                 if (invitado.getInvitado() == asistente.getEmpleado()){
-                    aux = true;
+                    val = true;
                 }
             }
-            if (aux == false) {
+            if (val == false) {
                 Asistencia ausente = new Asistencia(invitado.getInvitado(), EstadoAsistencia.AUSENTE);
                 asistentesAusentes.add(ausente);
             }
@@ -138,7 +102,7 @@ class ReunionPresencial extends Reunion {
     }
 
     @Override
-    public void finalizar() {
+    public void finalizar(){
 
         if (horaInicio == null) {
             throw new ReunionNoIniciadaException("No se puede finalizar una reunión que no ha sido iniciada.");

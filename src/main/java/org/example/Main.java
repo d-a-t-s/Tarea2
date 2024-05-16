@@ -8,11 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-
-        // Crear instancias de Empleado con el departamento correspondiente
-        Departamento marketing = new Departamento("Marketing");
-        Departamento otro = new Departamento("Otro");
+    public static void main(String[] args) throws InterruptedException {
 
         Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com");
         Empleado empleado2 = new Empleado(2, "María", "Gómez", "maria@example.com");
@@ -37,7 +33,7 @@ public class Main {
         Instant horaPrevista = Instant.parse("2024-05-16T09:00:00Z");
         Duration duracionPrevista = Duration.ofHours(1);
         String enlaceReunion = "https://ejemplo.com/reunion";
-        ReunionVirtual reunionVirtual = new ReunionVirtual(empleado1, fechaReunion, horaPrevista, duracionPrevista, enlaceReunion);
+        ReunionVirtual reunionVirtual = new ReunionVirtual(empleado1, fechaReunion, horaPrevista, duracionPrevista, enlaceReunion, TipoReunion.MARKETING);
 
         // Invitar empleados de ambos departamentos a la reunión
         departamento1.invitar(reunionVirtual);
@@ -53,24 +49,31 @@ public class Main {
         // Obtener la lista de invitados desde la reunión
         List<Invitacion> invitaciones = reunionVirtual.getInvitados();
 
-        //Ingresar a empleados a la hora
-        for (Invitacion invitacion : reunionVirtual.getInvitados()) {
-            if (invitacion.getInvitado().equals(empleado2)) {
-                reunionVirtual.ingresarReunion(invitacion);
-                break;
-            }
+        reunionVirtual.ingresarReunion(invitaciones.get(0));
+        reunionVirtual.ingresarReunion(invitaciones.get(1));
+        reunionVirtual.iniciar();
+        Thread.sleep(10000);
+        reunionVirtual.agregarNota("Feliz en mi reunion :) XDXDXD");
+        reunionVirtual.ingresarReunion(invitaciones.get(2));
+        reunionVirtual.ingresarReunion(invitaciones.get(3));
+        reunionVirtual.finalizar();
+
+        List<Asistencia> ausentes = reunionVirtual.obtenerAusencias();
+
+        System.out.println("LEGARON TEMPRANO");
+        for(Asistencia asistente : reunionVirtual.asistentesPresentes){
+            System.out.println(asistente.getEmpleado().getNombre());
         }
-
-        //Tiempo reunion mas tarde
-
-        //Ingresar a empleados tardes
-        for (Invitacion invitacion : reunionVirtual.getInvitados()) {
-            if (invitacion.getInvitado().equals(empleado2)) {
-                reunionVirtual.ingresarReunion(invitacion);
-                break;
-            }
+        System.out.println("");
+        System.out.println("LLEGARON TARDE");
+        for(Asistencia asistente : reunionVirtual.asistentesTarde){
+            System.out.println(asistente.getEmpleado().getNombre());
         }
-
+        System.out.println("");
+        System.out.println("NO LLEGARON");
+        for(Asistencia asistente : reunionVirtual.asistentesAusentes){
+            System.out.println(asistente.getEmpleado().getNombre());
+        }
         System.out.println("");
         // Mostrar resultados de la asistencia
         System.out.println("Asistencia a la reunión:");
@@ -79,20 +82,9 @@ public class Main {
         List<Asistencia> ausencias = reunionVirtual.obtenerAusencias();
         int totalAsistentes = reunionVirtual.obtenerTotalAsistencia();
         float porcentajeAsistencia = reunionVirtual.obtenerPorcentajeAsistencia();
-
-        System.out.println("Asistentes:");
-        for (Asistencia asistencia : asistencias) {
-            System.out.println(asistencia.getEmpleado().getNombre() + " - " + asistencia.getEstado());
-        }
-        System.out.println("Retrasos:");
-        for (Asistencia retraso : retrasos) {
-            System.out.println(retraso.getEmpleado().getNombre() + " - " + retraso.getEstado());
-        }
-
-        System.out.println("Ausencias:");
-        for (Asistencia ausencia : ausencias) {
-            System.out.println(ausencia.getEmpleado().getNombre() + " - " + ausencia.getEstado());
-        }
+        System.out.println("Total de asistentes: " + totalAsistentes);
+        System.out.println("Porcentaje de asistencia: " + porcentajeAsistencia + "%");
+        System.out.println("Nota de la reunion: " + reunionVirtual.getNotas().get(0));
 
         // Crear una instancia de Informe y generar el informe
         Informe informe = new Informe();
@@ -100,9 +92,6 @@ public class Main {
             informe.hacerInforme(reunionVirtual);
         } catch (IOException e) {
             System.out.println("Error al generar el informe: " + e.getMessage());
-
-            System.out.println("Total de asistentes: " + totalAsistentes);
-            System.out.println("Porcentaje de asistencia: " + porcentajeAsistencia + "%");
         }
     }
 }
