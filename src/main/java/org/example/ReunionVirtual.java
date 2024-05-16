@@ -45,7 +45,7 @@ class ReunionVirtual extends Reunion {
     }
     //Metodo para agregar a la reunion uno por uno
     @Override
-    public void ingresarReunion(Invitacion invitacion){
+    public void ingresarReunion(Invitacion invitacion) {
         Asistencia asistencia = new Asistencia(invitacion.getInvitado(), EstadoAsistencia.AUSENTE);
         if (asistencia.getHoraLlegada().isBefore(horaPrevista)) {
             asistencia.setEstado(EstadoAsistencia.PRESENTE);
