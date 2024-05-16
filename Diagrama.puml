@@ -51,6 +51,14 @@ abstract class Reunion {
     + setNotas(List<Nota> notas) : void
 }
 
+class informe {
+    # archivo : FileWriter
+    # escritor : PrintWriter
+
+    + hcaerInforme(ReunionVirtual reunion) : void
+    + hacerInforme(ReunionPresencial reunion) : void
+}
+
 enum TipoReunion {
   * MARKETING
   * TECNICA
