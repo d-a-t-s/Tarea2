@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReunionPresencial extends Reunion {
+class ReunionPresencial extends Reunion {
     private String sala;
 
     // Constructor

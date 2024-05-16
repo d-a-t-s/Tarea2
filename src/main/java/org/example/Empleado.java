@@ -1,4 +1,6 @@
 package org.example;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Empleado implements Invitable {
     private int id;
@@ -6,6 +8,7 @@ public class Empleado implements Invitable {
     private String apellidos;
     private String correo;
     private Departamento departamento;
+    private List<Reunion> reuniones;
 
     // Constructor
     public Empleado(int id, String nombre, String apellidos, String correo, Departamento departamento) {
@@ -32,6 +35,7 @@ public class Empleado implements Invitable {
         this.correo = correo;
         this.departamento = departamento;
         departamento.agregarEmpleado(this);
+        this.reuniones = new ArrayList<>();
     }
 
     // Métodos getters y setters
@@ -75,8 +79,13 @@ public class Empleado implements Invitable {
         this.departamento = departamento;
     }
 
+    public List<Reunion> getReuniones() {
+        return reuniones;
+    }
+
     public void invitar(Reunion reunion){
         Invitacion invitacion = new Invitacion();
         reunion.agregarInvitacion(this, invitacion);
+        this.reuniones.add(reunion);
     }
 }
