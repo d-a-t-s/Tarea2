@@ -10,6 +10,14 @@ public class Asistencia {
 
     // Constructor
     public Asistencia(Empleado empleado, EstadoAsistencia estado) {
+
+        if (empleado == null) {
+            throw new CampoVacioException("El empleado no puede ser nulo.");
+        }
+        if (estado == null) {
+            throw new CampoVacioException("El estado de la asistencia no puede ser nulo.");
+        }
+
         this.empleado = empleado;
         this.estado = estado;
         horaLlegada = Instant.now();
