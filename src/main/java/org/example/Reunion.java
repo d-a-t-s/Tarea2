@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract class Reunion{
+    protected List<Nota> notas;
     protected List<Invitacion> invitados;
     protected List<Asistencia> asistentesPresentes;
     protected List<Asistencia> asistentesTarde;
@@ -19,6 +20,7 @@ abstract class Reunion{
     protected Instant horaFin;
 
     public Reunion(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista){
+        notas = new ArrayList<>();
         invitados = new ArrayList<>();
         asistentesPresentes = new ArrayList<>();
         asistentesTarde = new ArrayList<>();
@@ -30,6 +32,7 @@ abstract class Reunion{
         this.horaInicio = null;
         this.horaFin = null;
     }
+    public abstract void agregarNota(String texto);
     public abstract void agregarInvitacion(Empleado invitado, Invitacion invitacion);
     public abstract void ingresarReunion(Invitacion inv);
     public abstract void ingresarReunion(List<Invitacion> invs);

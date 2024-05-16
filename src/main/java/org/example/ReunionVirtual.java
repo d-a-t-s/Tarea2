@@ -18,7 +18,11 @@ class ReunionVirtual extends Reunion {
 
         this.enlace = enlace;
     }
-
+    @Override
+    public void agregarNota(String texto){
+        Nota nota = new Nota(texto);
+        notas.add(nota);
+    }
     @Override
     public void agregarInvitacion(Empleado invitado, Invitacion invitacion) {
         invitacion.setInvitado(invitado);
