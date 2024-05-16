@@ -9,6 +9,11 @@ public class Departamento implements Invitable {
 
     // Constructor
     public Departamento(String nombre) {
+
+        if (nombre == null || nombre.isEmpty() ) {
+            throw new IllegalArgumentException("El nombre del departamento no puede estar vacío.");
+        }
+
         this.nombre = nombre;
         this.empleados = new ArrayList<>();
     }
