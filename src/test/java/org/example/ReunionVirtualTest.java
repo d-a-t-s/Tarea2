@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MainTest {
+class ReunionVirtualTest {
 
     private Empleado empleado1;
     private Empleado empleado2;
