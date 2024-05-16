@@ -14,7 +14,6 @@ public class Main {
         Departamento marketing = new Departamento("Marketing");
         Departamento otro = new Departamento("Otro");
 
-        Empleado empleado0 = new Empleado(1, "Felipe", "Soto", "felipe@example.com");
         Empleado empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com");
         Empleado empleado2 = new Empleado(2, "María", "Gómez", "maria@example.com");
         Empleado empleado3 = new Empleado(3, "Pedro", "López", "pedro@example.com");
