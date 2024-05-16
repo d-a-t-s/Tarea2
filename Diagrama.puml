@@ -1,0 +1,181 @@
+@startuml
+
+abstract class Reunion {
+    # notas : List<Nota>
+    # invitados : List<Invitacion>
+    #asistentesPresentes : List<Asistencia>
+    #asistentesTarde : List<Asistencia>
+    #asistentesAusentes : List<Asistencia>
+    #organizador : empleado
+    #fecha : LocalDate
+    # horaPrevista: Instant
+    # duracionPrevista: Duration
+    # horaInicio: Instant
+    # horaFin: Instant
+
+    +abstract agregarNota(String texto) : void
+    +abstract agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+    +abstract ingresarReunion() : void
+    +abstract obtenerAsistencia() : List<Asistencia>
+    +abstract obtenerAusencias() : List<Asistencia>
+    +abstract ontenerRetrasos() : List<Asistencia>
+    +abstract obtenerTotalAsistencia() : int
+    +abstract obtenerPorcentajeAsistencia() : float
+    +abstract calcularTiempoReal() : float
+    +abstract iniciar() : void
+    +abstract finalizar() : void
+    + getInvitados(): List<Invitacion>
+    + getAsistentesPresentes(): List<Asistencia>
+    + getAsistentesTarde(): List<Asistencia>
+    + getAsistentesAusentes(): List<Asistencia>
+    + getOrganizador(): Empleado
+    + getFecha(): LocalDate
+    + getHoraPrevista(): Instant
+    + getDuracionPrevista(): Duration
+    + getHoraInicio(): Instant
+    + getHoraFin(): Instant
+    + setInvitados(invitados: List<Invitacion>): void
+    + setAsistentesPresentes(asistentesPresentes: List<Asistencia>): void
+    + setAsistentesTarde(asistentesTarde: List<Asistencia>): void
+    + setAsistentesAusentes(asistentesAusentes: List<Asistencia>): void
+    + setOrganizador(organizador: Empleado): void
+    + setFecha(fecha: LocalDate): void
+    + setHoraPrevista(horaPrevista: Instant): void
+    + setDuracionPrevista(duracionPrevista: Duration): void
+    + setHoraInicio(horaInicio: Instant): void
+    + setHoraFin(horaFin: Instant): void
+}
+
+enum TipoReunion {
+  * Tecnica
+  * Maketing
+  * Otro
+}
+
+enum EstadoAsistencia {
+    * PRESENTE
+    * AUSENTE
+    * TARDE
+}
+
+class Nota {
+  - contenido : String
+
+  +getContenido() : String
+  +setContenido(String contenido) : Void
+  +toString() : String
+}
+
+class Invitacion {
+  - hora : Instant
+  - invitado : Empleado
+
+  +getHora() : Instant
+  +serHora(Instant hora) : void
+  +getInvitado() : Empleado
+  +setInvitado(Empleado empleado) : void
+}
+
+class Asistencia {
+    - empleado : Empleado
+    - estado : EstadoAsistencia
+    - horaLlegada : Instant
+
+    + getEmpleado() : empleado
+    + setEmpleado(Empleado empleado) : void
+    + getEstado() : EstadoAsistencia
+    + setEstado(EstadoAsistencia estado) : void
+    + getHoraLlegada() : Instant
+    + setHoraLllegada(Instant horaLlegada) : void
+    + marcarLlegada(Instant horaLlegada) : void
+    + marcarAusente() : void
+    + marcarPresente() : void
+}
+
+
+interface Invitable {
+
+    +invitar(Reunion reunion) : void
+}
+
+class ReunionVirtual {
+    - enlace : String
+
+    + ingresarReunion() : void
+    + obtenerAsistencia() : List
+    + obtenerAusencias() : List
+    + ontenerRetrasos() : List
+    + obtenerTotalAsistencia() : int
+    + obtenerPorcentajeAsistencia() : float
+    + calcularTiempoReal() : float
+    + iniciar() : void
+    + finalizar() : void
+    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+}
+
+class ReunionPresencial {
+    - sala : String
+
+    + ingresarReunion() : void
+    + obtenerAsistencia() : List
+    + obtenerAusencias() : List
+    + ontenerRetrasos() : List
+    + obtenerTotalAsistencia() : int
+    + obtenerPorcentajeAsistencia() : float
+    + calcularTiempoReal() : float
+    + iniciar() : void
+    + finalizar() : void
+    + agregarInvitacion(Invitable invitado, Invitacion invitacion) : void
+    + getInvitado() : List<Invitacion>
+    +
+}
+
+class Empleado {
+    - id : Int
+    - nombre : String
+    - apellidos : String
+    - correo : String
+    - departamento : Departamento
+
+    +getId() : Int
+    +setId(Int id) : Int
+    +getNombre() : String
+    +setNombre(String Nombre) : Void
+    +getApellidos() : String
+    +setApellidos(String apellidos) : Void
+    +getCorreo() : String
+    +setCorreo(String correo) : Void
+    +getDepartamento() : Departamento
+    +setDepartamento(Departamento departamento) : Void
+    +invitar(Reunion reunion, Instant horaInvitacion) : void
+
+
+}
+
+class Departamento {
+    - nombre : String
+    - empleados : List<Empleado>
+
+    +getNombre() : String
+    +setNombre(String nombre) : Void
+    +getEmpleado() : List<Empleado>
+    +agregarEmpleado(Empleado empleado) : void
+    +removerEmpleado (Empleado empleado) : void
+    +obtenerNumeroEmpleados() : int
+    +invitar(Reunion reunion) : void
+}
+
+Nota --* Reunion
+Asistencia --* Reunion
+Invitacion --* Reunion
+ReunionVirtual --|> Reunion
+ReunionPresencial --|> Reunion
+Reunion --> TipoReunion
+Invitacion --> Invitable
+Reunion  --> Empleado: organizado por
+Empleado --o Departamento
+Empleado ..|> Invitable
+Departamento ..|> Invitable
+Asistencia --> EstadoAsistencia
+
+@enduml
