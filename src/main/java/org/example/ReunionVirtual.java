@@ -149,7 +149,9 @@ class ReunionVirtual extends Reunion {
         System.out.println("La reunión virtual ha finalizado a las" + horaFinFormateada);
     }
 
-
+    public String getEnlace(){
+        return enlace;
+    }
 
 }
 
