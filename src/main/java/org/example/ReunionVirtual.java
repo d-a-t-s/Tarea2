@@ -14,17 +14,17 @@ class ReunionVirtual extends Reunion {
     /**
      * Constructor de la reunión virtual.
      *
-     * @param organizador       El empleado que organiza la reunión.
-     * @param fecha             La fecha de la reunión.
-     * @param horaPrevista      La hora prevista de la reunión.
-     * @param duracionPrevista  La duración prevista de la reunión.
-     * @param enlace            El enlace para unirse a la reunión virtual.
-     * @param tipoReunion       El tipo de reunión.
+     * @param organizador      El empleado que organiza la reunión.
+     * @param fecha            La fecha de la reunión.
+     * @param horaPrevista     La hora prevista de la reunión.
+     * @param duracionPrevista La duración prevista de la reunión.
+     * @param enlace           El enlace para unirse a la reunión virtual.
+     * @param tipoReunion      El tipo de reunión.
      * @throws CampoVacioException si el enlace está vacío o nulo.
      */
     public ReunionVirtual(Empleado organizador, LocalDate fecha, Instant horaPrevista, Duration duracionPrevista, String enlace, TipoReunion tipoReunion) {
         super(organizador, fecha, horaPrevista, duracionPrevista, tipoReunion);
-        if (enlace == null || enlace.isEmpty()){
+        if (enlace == null || enlace.isEmpty()) {
             throw new CampoVacioException("El enlace de la reunión virtual no puede estar vacío.");
         }
         this.enlace = enlace;
@@ -97,21 +97,22 @@ class ReunionVirtual extends Reunion {
 
     /**
      * Obtiene la lista de asistencias ausentes en la reunión.
+     *
      * @return La lista de asistencias ausentes.
      */
     @Override
-    public List<Asistencia> obtenerAusencias(){
+    public List<Asistencia> obtenerAusencias() {
         // Crear una lista auxiliar para almacenar todas las asistencias, incluidas las presentes y las tardías.
         List<Asistencia> aux = new ArrayList<>();
         aux.addAll(asistentesPresentes);
         aux.addAll(asistentesTarde);
 
         // Iterar sobre la lista de invitados para verificar su asistencia.
-        for (Invitacion invitado : invitados){
-            boolean val= false;
+        for (Invitacion invitado : invitados) {
+            boolean val = false;
             // Verificar si el invitado está en la lista de asistencias.
-            for (Asistencia asistente : aux){
-                if (invitado.getInvitado() == asistente.getEmpleado()){
+            for (Asistencia asistente : aux) {
+                if (invitado.getInvitado() == asistente.getEmpleado()) {
                     val = true;
                 }
             }
@@ -128,6 +129,7 @@ class ReunionVirtual extends Reunion {
 
     /**
      * Calcula el total de asistentes a la reunión sumando el número de asistentes presentes y los que llegaron tarde.
+     *
      * @return El número total de asistentes.
      */
     @Override
@@ -137,10 +139,11 @@ class ReunionVirtual extends Reunion {
 
     /**
      * Calcula el porcentaje de asistencia a la reunión en función del número total de invitados.
+     *
      * @return El porcentaje de asistencia.
      */
     @Override
-    public float obtenerPorcentajeAsistencia(){
+    public float obtenerPorcentajeAsistencia() {
         int totalInvitados = invitados.size();
         int totalAsistentes = obtenerTotalAsistencia();
         return (totalAsistentes / (float) totalInvitados) * 100;
@@ -148,6 +151,7 @@ class ReunionVirtual extends Reunion {
 
     /**
      * Calcula la duración real de la reunión en minutos.
+     *
      * @return La duración real de la reunión en minutos.
      */
     @Override
@@ -172,6 +176,7 @@ class ReunionVirtual extends Reunion {
 
     /**
      * Finaliza la reunión estableciendo la hora de finalización y mostrando un mensaje de finalización.
+     *
      * @throws ReunionNoIniciadaException si la reunión no ha sido iniciada.
      */
     @Override
@@ -190,11 +195,23 @@ class ReunionVirtual extends Reunion {
 
     /**
      * Obtiene el enlace de la reunión virtual.
+     *
      * @return El enlace de la reunión.
      */
-    public String getEnlace(){
+    public String getEnlace() {
         return enlace;
     }
 
+    /**
+     * Devuelve una representación de cadena de este objeto.
+     *
+     * @return Una cadena que representa el objeto ReunionVirtual.
+     */
+    @Override
+    public String toString() {
+        return "ReunionVirtual{enlace='" + enlace + "', " + super.toString() + ", ...}";
+
+
+    }
 }
 

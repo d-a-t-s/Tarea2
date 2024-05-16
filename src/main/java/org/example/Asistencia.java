@@ -109,4 +109,17 @@ public class Asistencia {
     public void marcarPresente() {
         this.estado = EstadoAsistencia.PRESENTE;
     }
+
+    /**
+     * Devuelve una representación de cadena de este objeto.
+     *
+     * @return Una cadena que representa el objeto Asistencia.
+     */
+    public String toString() {
+        return "Asistencia{" +
+                "empleado=" + empleado +
+                ", estado=" + estado +
+                ", horaLlegada=" + horaLlegada +
+                '}';
+    }
 }

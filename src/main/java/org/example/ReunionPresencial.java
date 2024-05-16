@@ -197,6 +197,16 @@ class ReunionPresencial extends Reunion {
     public String getSala() {
         return sala;
     }
+
+    /**
+     * Devuelve una representación de cadena de este objeto.
+     *
+     * @return Una cadena que representa el objeto ReunionPresencial.
+     */
+
+    public String toString() {
+        return "ReunionPresencial{ubicacion='" + sala + "', " + super.toString() + ", ...}";
+    }
 }
 
 

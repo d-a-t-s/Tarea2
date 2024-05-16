@@ -49,9 +49,10 @@ abstract class Reunion {
     + setHoraFin(horaFin: Instant): void
     + setTipoReunion(TipoReunion tipoReunion) : void
     + setNotas(List<Nota> notas) : void
+    +toString() : String
 }
 
-class informe {
+class Informe {
     # archivo : FileWriter
     # escritor : PrintWriter
 
@@ -87,6 +88,7 @@ class Invitacion {
   +serHora(Instant hora) : void
   +getInvitado() : Empleado
   +setInvitado(Empleado empleado) : void
+  +toString() : String
 }
 
 class Asistencia {
@@ -103,6 +105,7 @@ class Asistencia {
     + marcarLlegada(Instant horaLlegada) : void
     + marcarAusente() : void
     + marcarPresente() : void
+    +toString() : String
 }
 
 
@@ -126,6 +129,7 @@ class ReunionVirtual {
     + iniciar() : void
     + finalizar() : void
     +getEnlace() : String
+    +toString() : String
 
 }
 
@@ -144,6 +148,7 @@ class ReunionPresencial {
     + iniciar() : void
     + finalizar() : void
     + getSala() : String
+    +toString() : String
 }
 
 class Empleado {
@@ -164,7 +169,7 @@ class Empleado {
     +getDepartamento() : Departamento
     +setDepartamento(Departamento departamento) : Void
     +invitar(Reunion reunion, Instant horaInvitacion) : void
-
+    +toString() : String
 
 }
 
@@ -179,6 +184,7 @@ class Departamento {
     +removerEmpleado (Empleado empleado) : void
     +obtenerNumeroEmpleados() : int
     +invitar(Reunion reunion) : void
+    +toString() : String
 }
 
 Nota --* Reunion
@@ -193,5 +199,6 @@ Empleado --o Departamento
 Empleado ..|> Invitable
 Departamento ..|> Invitable
 Asistencia --> EstadoAsistencia
+Informe --o Reunion
 
 @enduml

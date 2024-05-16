@@ -90,4 +90,13 @@ public class Departamento implements Invitable {
             empleado.invitar(reunion);
         }
     }
+
+    /**
+     * Devuelve una representación de cadena de este objeto.
+     *
+     * @return Una cadena que representa el objeto Departamento.
+     */
+    public String toString() {
+        return "Departamento{nombre='" + nombre + "', empleados=" + empleados + "}";
+    }
 }

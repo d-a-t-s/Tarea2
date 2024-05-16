@@ -135,4 +135,14 @@ public class Empleado implements Invitable {
         reunion.agregarInvitacion(this, invitacion);
         this.reuniones.add(reunion);
     }
+
+
+    /**
+     * Devuelve una representación de cadena de este objeto.
+     *
+     * @return Una cadena que representa el objeto Empleado.
+     */
+    public String toString() {
+        return "Empleado{id=" + id + ", nombre='" + nombre + "', apellido='" + apellidos + "', email='" + correo+ "'}";
+    }
 }

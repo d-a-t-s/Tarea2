@@ -53,4 +53,17 @@ public class Invitacion {
     public void setInvitado(Empleado invitado) {
         this.invitado = invitado;
     }
+
+    /**
+     * Devuelve una representación de cadena de este objeto.
+     *
+     * @return Una cadena que representa el objeto Invitacion.
+     */
+    @Override
+    public String toString() {
+        return "Invitacion{" +
+                "hora=" + hora +
+                ", invitado=" + invitado +
+                '}';
+    }
 }

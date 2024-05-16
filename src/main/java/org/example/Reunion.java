@@ -274,4 +274,13 @@ abstract class Reunion {
     public void setNotas(List<Nota> notas) {
         this.notas = notas;
     }
+
+    /**
+     * Devuelve una representación de cadena de este objeto.
+     *
+     * @return Una cadena que representa el objeto Reunion.
+     */
+    public String toString() {
+        return "Reunion{organizador=" + organizador + ", ...}";
+    }
 }
