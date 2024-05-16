@@ -78,7 +78,7 @@ public class DepartamentoTest {
         departamento.agregarEmpleado(empleado2);
 
         // Creamos una reunión
-        Reunion reunion = new ReunionVirtual(empleado1, null, null, null, "enlace");
+        Reunion reunion = new ReunionVirtual(empleado1, null, null, null, "enlace",TipoReunion.MARKETING);
 
         // Invitamos al departamento a la reunión
         departamento.invitar(reunion);
