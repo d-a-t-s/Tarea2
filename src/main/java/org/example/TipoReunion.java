@@ -17,5 +17,5 @@ public enum TipoReunion {
     /**
      * Otros tipos de reuniones no especificadas.
      */
-    OTROS;
+    OTROS
 }
