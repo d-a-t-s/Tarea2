@@ -3,8 +3,14 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Clase de prueba para la clase Nota.
+ */
 public class NotaTest {
 
+    /**
+     * Prueba del constructor de Nota.
+     */
     @Test
     public void testConstructorNota() {
         // Arrange
@@ -17,6 +23,9 @@ public class NotaTest {
         assertEquals(contenido, nota.getContenido());
     }
 
+    /**
+     * Prueba del constructor de Nota con contenido vacío.
+     */
     @Test
     public void testConstructorNotaContenidoVacio() {
         // Arrange
@@ -28,6 +37,9 @@ public class NotaTest {
         });
     }
 
+    /**
+     * Prueba del constructor de Nota con contenido nulo.
+     */
     @Test
     public void testConstructorNotaContenidoNulo() {
         // Arrange
@@ -39,6 +51,9 @@ public class NotaTest {
         });
     }
 
+    /**
+     * Prueba del método setContenido de Nota.
+     */
     @Test
     public void testSetContenido() {
         // Arrange

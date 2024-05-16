@@ -4,8 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.time.Instant;
 
+/**
+ * Clase de prueba para la clase Asistencia.
+ */
 public class AsistenciaTest {
 
+    /**
+     * Prueba del constructor de Asistencia.
+     */
     @Test
     public void testConstructor() {
         Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example9.com");
@@ -20,6 +26,9 @@ public class AsistenciaTest {
         assertNotNull(asistencia.getHoraLlegada());
     }
 
+    /**
+     * Prueba del constructor de Asistencia con empleado nulo.
+     */
     @Test
     public void testConstructor_EmpleadoNulo() {
         EstadoAsistencia estado = EstadoAsistencia.PRESENTE;
@@ -29,6 +38,9 @@ public class AsistenciaTest {
         });
     }
 
+    /**
+     * Prueba del constructor de Asistencia con estado nulo.
+     */
     @Test
     public void testConstructor_EstadoNulo() {
         Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
@@ -38,6 +50,9 @@ public class AsistenciaTest {
         });
     }
 
+    /**
+     * Prueba para marcar la llegada a la reunión.
+     */
     @Test
     public void testMarcarLlegada() {
         Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
@@ -51,6 +66,9 @@ public class AsistenciaTest {
         assertEquals(horaLlegada, asistencia.getHoraLlegada());
     }
 
+    /**
+     * Prueba para marcar asistente como ausente.
+     */
     @Test
     public void testMarcarAusente() {
         Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");
@@ -62,6 +80,9 @@ public class AsistenciaTest {
         assertEquals(EstadoAsistencia.AUSENTE, asistencia.getEstado());
     }
 
+    /**
+     * Prueba para marcar asistente como presente.
+     */
     @Test
     public void testMarcarPresente() {
         Empleado empleado = new Empleado(1, "Juan", "Pérez", "juan@example.com");

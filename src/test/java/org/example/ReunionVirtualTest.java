@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Clase de prueba para la clase ReunionVirtual.
+ */
 class ReunionVirtualTest {
 
     private Empleado empleado1;
@@ -21,6 +24,9 @@ class ReunionVirtualTest {
     private Departamento departamento2;
     private ReunionVirtual reunionVirtual;
 
+    /**
+     * Configuración inicial para las pruebas.
+     */
     @BeforeEach
     void setUp() {
         empleado1 = new Empleado(1, "Juan", "Pérez", "juan@example.com");
@@ -49,6 +55,9 @@ class ReunionVirtualTest {
         departamento2.invitar(reunionVirtual);
     }
 
+    /**
+     * Prueba de la lógica principal de la reunión virtual.
+     */
     @Test
     void testMain() throws InterruptedException {
         List<Invitacion> invitaciones = reunionVirtual.getInvitados();

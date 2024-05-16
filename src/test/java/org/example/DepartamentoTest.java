@@ -5,8 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase de prueba para la clase Departamento.
+ */
 public class DepartamentoTest {
 
+    /**
+     * Prueba del constructor de Departamento.
+     */
     @Test
     public void testConstructor() {
         String nombre = "Departamento de Pruebas";
@@ -17,6 +23,9 @@ public class DepartamentoTest {
         assertTrue(departamento.getEmpleados().isEmpty());
     }
 
+    /**
+     * Prueba del constructor de Departamento con nombre nulo.
+     */
     @Test
     public void testConstructor_NombreNulo() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -24,6 +33,9 @@ public class DepartamentoTest {
         });
     }
 
+    /**
+     * Prueba del constructor de Departamento con nombre vacío.
+     */
     @Test
     public void testConstructor_NombreVacio() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -31,6 +43,9 @@ public class DepartamentoTest {
         });
     }
 
+    /**
+     * Prueba para agregar un empleado al departamento.
+     */
     @Test
     public void testAgregarEmpleado() {
         Departamento departamento = new Departamento("Departamento de Pruebas");
@@ -41,6 +56,9 @@ public class DepartamentoTest {
         assertTrue(departamento.getEmpleados().contains(empleado));
     }
 
+    /**
+     * Prueba para remover un empleado del departamento.
+     */
     @Test
     public void testRemoverEmpleado() {
         Departamento departamento = new Departamento("Departamento de Pruebas");
@@ -52,6 +70,9 @@ public class DepartamentoTest {
         assertFalse(departamento.getEmpleados().contains(empleado));
     }
 
+    /**
+     * Prueba para obtener el número de empleados del departamento.
+     */
     @Test
     public void testObtenerNumeroEmpleados() {
         Departamento departamento = new Departamento("Departamento de Pruebas");
@@ -64,6 +85,9 @@ public class DepartamentoTest {
         assertEquals(2, departamento.obtenerNumeroEmpleados());
     }
 
+    /**
+     * Prueba para invitar a un departamento a una reunión.
+     */
     @Test
     public void testInvitar() {
         // Creamos un departamento
